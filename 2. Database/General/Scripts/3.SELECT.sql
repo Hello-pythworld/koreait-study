@@ -56,3 +56,41 @@
 11. RIGHT JOIN
 	- on절에서 두 테이블의 공통된 값이 없어도 조인된 테이블(JOIN 테이블)은 무조건 조회
 	- 기준 테이블은 값이 없어도 null로 채워져서 조회됨.
+	
+12. 서브 쿼리
+	- SQL 쿼리 안에 포함된 또 다른 쿼리
+	- 쿼리안에 쿼리가 있는 구조
+	
+13. 조건 서브 쿼리
+	- WHERE절에 사용되는 서브쿼리
+	- 단일행 서브쿼리 : 서브쿼리의 실행 결과가 데이터가 1개인 서브쿼리
+	- 다중행 서브쿼리 : 서브쿼리의 실행 결과가 2개 이상인 서브쿼리
+	- 다중열 다중행 서브쿼리 : 서브쿼리의 실행 결과가 데이터가 2개 이상, 컬럼이 2개 이상인 서브쿼리
+	
+14. 단일행 서브쿼리
+	- 결과 값의 데이터(행)가 1개인 서브쿼리
+	- 단일행 비교 연산자 사용
+		>단일행 비교 연산자 : =, <=, <, >=, >, !=
+	- 예시) SELECT first_name, last_name FROM employees
+			WHERE emp_no = (SELECT max(emp)_no FROM employees)
+15. 다중행 서브쿼리
+	- 결과 값의 데이터(행)가 2개 이상인 서브쿼리
+	- 다중행 비교 연ㅅ나자 사용
+		> 다중행 비교 연산자 : IN, ALL, ANY, ...
+	- 예시) SELECT emp_no, salary FROM salaries
+			WHERE salary in(SELECT salary FROM salaries)
+
+16. 다중열 다중행 서브쿼리
+	- 결과 값의 데이터와 컬럼의 개수가 2개 이상인 서브쿼리
+	- 예시) SELECT emp_no, title, to_date FROM titles
+			WHERE (emp_no, to_date) IN (SELECT emp_no, max(to_date) FROM titles
+										GROUP BY emp_no)
+										
+17. 인라인 뷰
+	- FROM절에 서브쿼리를 사용하는 방식
+	- 서브쿼리 수행 결과가 테이블처럼 사용됨
+	- 에시) SELECT * FROM (SELECT dept_no, count(*) AS cnt FROM dept_emp
+							GROUP BY dept_no) d;
+	- 주의1) 반드시 인라인 뷰 작성후 테이블 별칭을 지어줘야 함.
+	- 주의2) 그룹 함수 사용 시 별칭을 지어줘야 메인쿼리에서 사용 가능
+	- 참고) 조건은 되도록 메인쿼리에서 작성 해주는 것이 성능상 좋음.
