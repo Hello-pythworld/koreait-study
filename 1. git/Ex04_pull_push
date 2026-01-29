@@ -1,0 +1,13 @@
+1. pull
+    - 원격 저장소의 코드를 가져오기 위한 명령어
+    - ex) git pull origin master
+
+2. push
+    -현재 로컬 코드를 원격저장소로 올리기 위한 명령어
+    -ex) git push origin master
+
+3. 참고
+    - origin은 깃 셋팅할 때 remote 설정한 이름
+    - git remote add origin 깃허브주소
+        > origin 부분이 원격 저장소의 일므
+        > 임의로 설정 가능 

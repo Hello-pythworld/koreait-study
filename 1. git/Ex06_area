@@ -1,0 +1,15 @@
+1. 깃의 area
+    - 로컬의 영역을 의미
+
+2. Working Directory 영역
+    - 내가 작업중인 디렉토리(폴더)가 있는 영역
+    - Untracked : 새로 추가된 파일
+    - Tracked : 수정된 파일, 삭제된 파일
+
+3. Staging Area
+    - 파일이 add 되어서 commit을 하기 전, 준비 상태인 영역
+    - git add 파일명을 입력하면 Staging Area로 이동됨.
+
+4. Local Repository
+    - 커밋이 완료된 영역, 원격 저장소로 올릴 준비가 된 영역
+    - git commit을 입력하면 Local Repository로 이동됨.
