@@ -1,5 +1,0 @@
--- 사번, 이름, 연봉 조회
-SELECT e.emp_nol, e.first_name, s.salary
-FROM employees e
-JOIN salaries s
-ON e.emp_no = s.emp_no;

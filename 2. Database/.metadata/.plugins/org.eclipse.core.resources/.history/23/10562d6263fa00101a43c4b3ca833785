@@ -1,3 +1,0 @@
-CREATE TABLE db_tcl (
-	id varchar(50)
-);

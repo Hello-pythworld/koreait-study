@@ -1,7 +1,0 @@
-CREATE TABLE db_tcl (
-	id varchar(50)
-);
-
-INSERT INTO db_Tcl values('test1');
-INSERT INTO db_Tcl values('test2');
-INSERT INTO db_Tcl values('test3');

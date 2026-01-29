@@ -1,6 +1,0 @@
--- 사번, 이름, 연봉 조회
-SELECT *
-FROM employees e
-JOIN salaries s
-ON e.emp_no = s.emp_no
-WHERE to_date = '9999-01-01';

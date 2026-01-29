@@ -1,7 +1,0 @@
-1. DML
-	- 데이터 조회 및 변경을 하기 위한 언어
-	- 종류 : SELECT, INSERT, DELETE, UPDATEALTER 
-
-2. SELECT 
-	- 데이터를 조회할 때 사용
-	- 문법 :  SELECT 컬럼명 FROM 테이블명;
