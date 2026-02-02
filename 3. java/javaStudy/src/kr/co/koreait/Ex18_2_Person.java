@@ -21,11 +21,25 @@ public class Ex18_2_Person {
 		
 //		이름하고 나이만 받는 생성자
 //		 - 주소랑 핸드폰 번호는 기본값을 지정해서 줌.
+		
+		
+//		이름만 받는 생성자
+//		 - 나머지 값을 this() 활용해서 초기화 진행
+//		 - age : 0, addr : "인천", phone : "010-1234-1234"
+//		 - 매개변수 4개를 받는 생성자를 호출하여 초기화 진행
+		Ex18_2_Person(String name) {
+			this(name, "인천", 0, "010-1234-1234"); 
+		}
+		
 		Ex18_2_Person(String name, int age) {
-			this.name = name;
-			this.age = age;
-			this.addr = "지구"; 
-			this.phonenumber = "아직 없음"; 
+//			생성자 this()
+//			 - 같은 클래스의 다른 생성자를 호출할 때 사용(생성자 재사용)
+//			 - 반드시 첫 줄에 선언되어야 함.
+			this(name, "지구", age , "아직 없음");
+//			this.name = name;
+//			this.age = age;
+//			this.addr = "지구"; 
+//			this.phonenumber = "아직 없음";
 					
 		}
 		

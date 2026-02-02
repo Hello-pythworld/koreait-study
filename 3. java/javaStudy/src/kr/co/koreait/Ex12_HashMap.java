@@ -19,6 +19,8 @@ public class Ex12_HashMap {
 		map.remove("키2");
 		
 		System.out.println(map);
+		
+		
 		System.out.println(map.get("키1"));
 		
 		System.out.println(map.keySet()); // 키를 배열 형태로 반환
