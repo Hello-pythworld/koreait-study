@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 - Spring 학습 플랫폼</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Spring Hub</div>
+            <ul class="nav-center">
+                <li><a href="index.html" class="nav-link">홈</a></li>
+                <li><a href="announcements.html" class="nav-link active">공지사항</a></li>
+                <li><a href="board.html" class="nav-link">자유게시판</a></li>
+                <li><a href="profile.html" class="nav-link">회원정보</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="login.html" class="btn btn-secondary" style="text-decoration: none;">로그인</a>
+                <a href="register.html" class="btn btn-primary" style="text-decoration: none;">회원가입</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h1>공지사항</h1>
+            <!-- 글쓰기 버튼 추가 -->
+            <a href="announcement-write.html" class="btn btn-primary" style="text-decoration: none;">글쓰기</a>
+        </div>
+        <div class="post-list" id="announcementList">
+            <div class="post-item" onclick="goToAnnouncement(1)">
+                <div class="post-header">
+                    <div>
+                        <div class="post-title">Spring 학습 플랫폼 오픈</div>
+                        <div class="post-content">새로운 학습 플랫폼이 오픈되었습니다. 많은 이용 부탁드립니다.</div>
+                    </div>
+                    <span class="badge">공지</span>
+                </div>
+                <div class="post-footer">
+                    <span>관리자</span>
+                    <span>2025.11.29</span>
+                </div>
+            </div>
+            <div class="post-item" onclick="goToAnnouncement(2)">
+                <div class="post-header">
+                    <div>
+                        <div class="post-title">시스템 점검 예정</div>
+                        <div class="post-content">12월 1일 오전 2시부터 4시까지 시스템 점검이 예정되어 있습니다.</div>
+                    </div>
+                    <span class="badge">점검</span>
+                </div>
+                <div class="post-footer">
+                    <span>관리자</span>
+                    <span>2025.11.28</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 페이징 버튼 추가 -->
+        <div class="pagination">
+            <button class="page-btn" onclick="goToFirstPage()"><<</button>
+            <button class="page-btn" onclick="goToPrevPage()"><</button>
+            <button class="page-btn active" onclick="goToPage(1)">1</button>
+            <button class="page-btn" onclick="goToPage(2)">2</button>
+            <button class="page-btn" onclick="goToPage(3)">3</button>
+            <button class="page-btn" onclick="goToNextPage()">></button>
+            <button class="page-btn" onclick="goToLastPage()">>></button>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+</body>
+</html>
