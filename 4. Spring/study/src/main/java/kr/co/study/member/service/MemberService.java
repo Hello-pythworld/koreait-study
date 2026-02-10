@@ -1,6 +1,8 @@
 package kr.co.study.member.service;
 
+import kr.co.study.member.dto.ReqLoginDTO;
 import kr.co.study.member.dto.ReqRegisterDTO;
+import kr.co.study.member.dto.ResLoginDTO;
 
 /**
  * 회원 도메인의 핵심 비즈니스 로직을 정의하는 서비스 인터페이스
@@ -20,4 +22,17 @@ public interface MemberService {
 	 * @param request 사용자가 입력한 회원가입 정보를 담는 DTO
 	 */
 	void register(ReqRegisterDTO request);
+	
+	/**
+	 * 
+	 * 기능
+	 *  - 해당 아이디를 가진 유저가 있는지 조회(findByUserId)
+	 *  - 만약 존재하지 않으면 null 반환
+	 *  - 존재한다면 사용자가 입력한 평문 비밀번호로 BCrypt로 검증
+	 *  	> 사용자가 입력한 비밀번호가 암호화된 비밀번호와 일치하는지
+	 *  - 일치하지 않는다면 null 반환
+	 * @param request 사용자가 입력한 로그인 정보(userId, password)
+	 */
+	
+	ResLoginDTO login(ReqLoginDTO request);
 }

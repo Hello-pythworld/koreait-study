@@ -7,21 +7,7 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Spring Hub</div>
-            <ul class="nav-center">
-                <li><a href="index.html" class="nav-link">홈</a></li>
-                <li><a href="announcements.html" class="nav-link active">공지사항</a></li>
-                <li><a href="board.html" class="nav-link">자유게시판</a></li>
-                <li><a href="profile.html" class="nav-link">회원정보</a></li>
-            </ul>
-            <div class="nav-right">
-                <a href="login.html" class="btn btn-secondary" style="text-decoration: none;">로그인</a>
-                <a href="register.html" class="btn btn-primary" style="text-decoration: none;">회원가입</a>
-            </div>
-        </nav>
-    </header>
+    <header th:replace="~{fragments/header :: global_header}"></header>
 
     <div class="container">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">

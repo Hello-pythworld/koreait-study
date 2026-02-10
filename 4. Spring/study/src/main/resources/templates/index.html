@@ -7,22 +7,7 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">Spring Hub</div>
-            <ul class="nav-center">
-                <li><a href="index.html" class="nav-link active">홈</a></li>
-                <li><a href="announcements.html" class="nav-link">공지사항</a></li>
-                <li><a href="board.html" class="nav-link">자유게시판</a></li>
-                <li><a href="profile.html" class="nav-link">회원정보</a></li>
-            </ul>
-            <div class="nav-right">
-                <a href="login.html" class="btn btn-secondary">로그인</a>
-                <a href="/member/register/form" class="btn btn-primary" style="text-decoration: none; display: inline-block;">회원가입</a>
-            </div>
-        </nav>
-    </header>
-
+<header th:replace="~{fragments/header :: global_header}"></header>
     <div class="container">
         <h1 style="margin-bottom: 1rem;">Spring 학습 플랫폼에 오신 것을 환영합니다</h1>
         <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.1rem;">
