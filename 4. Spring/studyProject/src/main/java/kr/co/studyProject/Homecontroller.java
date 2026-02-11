@@ -15,6 +15,7 @@ public class Homecontroller {
 	@RequestMapping("/")
 	public String goHome() {
 
-		return "pages/member/signup";
+		return "pages/member/home";
 	}
+	
 }

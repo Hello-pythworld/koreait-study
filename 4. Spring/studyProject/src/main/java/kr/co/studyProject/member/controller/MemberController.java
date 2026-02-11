@@ -27,4 +27,10 @@ public class MemberController {
     public String registerForm() {
         return "pages/member/signup"; // 또는 member/register
     }
+    
+    // 회원가입 페이지 이동
+    @GetMapping("/signup/form")
+    public String signup() {
+    	return "pages/member/signup";
+    }
 }

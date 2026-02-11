@@ -22,6 +22,12 @@ public class MemberController {
 //	private MemberService memberService;
 	private final MemberService memberService;
 
+	
+	@GetMapping("/")
+    public String home() {
+        return "index"; // templates/index.html
+    }
+
 	/**
 	 * 회원가입 페이지로 이동할 때 사용되는 메서드 입니다.
 	 * localhost:8080/member/register/form으로 GET 요청이 오면 실행됩니다.
@@ -60,19 +66,16 @@ public class MemberController {
 	 */
 	@PostMapping("/login")
 	public String login(ReqLoginDTO request, HttpSession session) {
-		ResLoginDTO response = memberService.login(request);
-		
-//		로그인 실패할 경우, 회원가입 페이지로 이동
-		if(response == null) {
-			return "redirect:/member/register/form";
-		}
-		
-//		로그인이 성공할 경우
-		session.setAttribute("LOGIN_USER", response);
-		return "redirect:/"; // 메인페이지로 이동
-		
-	
-		
+
+	    ResLoginDTO loginUser = memberService.login(request);
+
+	    if (loginUser == null) {
+	        return "redirect:/member/login/form";
+	    }
+
+	    session.setAttribute("LOGIN_USER", loginUser);
+
+	    return "redirect:/";
 	}
 	/**
 	 * 로그아웃을 처리하는 메서드입니다.
@@ -88,5 +91,7 @@ public class MemberController {
 		session.invalidate(); // 세션 무효화
 		
 		return "redirect:/";
+
 	}
 }
+

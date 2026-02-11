@@ -20,11 +20,13 @@ import lombok.Setter;
 public class Member {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 자동 증가(auto_increment)
-	private Long id;
-	private String userId;
+	
 	private String userName;
 	private String email;
+	private String nickName;
 	private String password;
+	private String passwordCheck;
+	private String phonenumber;
 	
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;

@@ -1,13 +1,17 @@
 package kr.co.study.member.service;
 
+import org.springframework.stereotype.Service;
+
 import kr.co.study.member.dto.ReqLoginDTO;
 import kr.co.study.member.dto.ReqRegisterDTO;
 import kr.co.study.member.dto.ResLoginDTO;
+import lombok.RequiredArgsConstructor;
 
 /**
  * 회원 도메인의 핵심 비즈니스 로직을 정의하는 서비스 인터페이스
  * 주로 Controller -> service -> Repository 흐름에서 서비스 계층의 역할을 담당.
  */
+@Service
 public interface MemberService {
 
 	/**
