@@ -6,6 +6,6 @@ import kr.co.studyProject.member.entity.Member;
 
 public interface MemberRepository extends JpaRepository<Member, Long>{
 
-	boolean existsByUser(String userId); 
-	boolean existsByemail(String email);
+	boolean existsByUserName(String userName); 
+	boolean existsByEmail(String email);
 }

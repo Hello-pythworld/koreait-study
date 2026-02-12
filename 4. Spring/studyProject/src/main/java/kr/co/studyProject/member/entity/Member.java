@@ -2,11 +2,13 @@ package kr.co.studyProject.member.entity;
 
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,22 +20,29 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Member {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY) // 기본 키 자동 증가(auto_increment)
-	
-	private String userName;
-	private String email;
-	private String nickName;
-	private String password;
-	private String passwordCheck;
-	private String phonenumber;
-	
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
-	
-//	INSERT 되기 직전에 자동 실행되는 어노테이션
-	@PrePersist
-	public void prePersist() {
-		this.createdAt = LocalDateTime.now();
-	}
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;   // ✅ PK는 무조건 숫자
+
+    private String userName;
+    private String email;
+    private String nickName;
+    private String password;
+    @Column(name = "phonenumber")
+    private String phoneNumber;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 }

@@ -2,6 +2,8 @@ package kr.co.study.board.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import kr.co.study.board.dto.ReqBoardDTO;
 import kr.co.study.board.dto.ResBoardDTO;
 
@@ -24,6 +26,21 @@ public interface BoardService {
 	 * @param writerId 로그인한 회원의 ID
 	 */
 	void write(ReqBoardDTO request, Long writerId);
+	/**
+	 * 게시글 리스트 조회기능
+	 *  -boardType으로 게시판종류를 확인 후 조회
+	 *  - 조회된 Board 엔티티를 Response DTO 타입으로 변환
+	 * @return
+	 */
 	
-	List<ResBoardDTO> getBoardList();
+	/**
+	 * 게시글 상세보기 조회
+	 *  - PK를 기준으로 조건 검색
+	 *  - PK로 조건을 주므로 조회 결과는 무조건 1개의 게시글
+	 * 
+	 * @param id 게시글 PK
+	 * @return
+	 */
+	ResBoardDTO getBoardDetail(Long id);
+	Page<ResBoardDTO> getBoardList(int page);
 }

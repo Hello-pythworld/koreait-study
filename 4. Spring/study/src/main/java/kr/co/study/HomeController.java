@@ -16,5 +16,3 @@ public class HomeController {
         return "index"; // templates/index.html
     }
 }
-
-

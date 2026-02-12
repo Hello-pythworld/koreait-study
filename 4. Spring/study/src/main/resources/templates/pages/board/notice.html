@@ -17,7 +17,8 @@
         </div>
         <div class="post-list" id="announcementList">
         
-            <div class="post-item" th:each="notice : ${list}">
+            <div class="post-item" th:each="notice : ${list}"
+            	 th:onclick="|location.href='/board/notice/detail?id=' + ${notice.id}|">
                 <div class="post-header">
                     <div>
                         <div class="post-title" th:text="${notice.title}"></div>
@@ -34,13 +35,18 @@
 
         <!-- 페이징 버튼 추가 -->
         <div class="pagination">
-            <button class="page-btn" onclick="goToFirstPage()"><<</button>
-            <button class="page-btn" onclick="goToPrevPage()"><</button>
-            <button class="page-btn active" onclick="goToPage(1)">1</button>
-            <button class="page-btn" onclick="goToPage(2)">2</button>
-            <button class="page-btn" onclick="goToPage(3)">3</button>
-            <button class="page-btn" onclick="goToNextPage()">></button>
-            <button class="page-btn" onclick="goToLastPage()">>></button>
+        <!-- 이전 페이지(<) -->
+            <button class="page-btn"
+            		th:onclick="${currentPage <= 1} ? null : 'location.href=\'/board/notice?page=' + (${currentPage - 1}) + '\''"><</button>
+            
+            <button class="page-btn active" 
+            		th:each="i : ${#numbers.sequence(startPage, endPage)}"
+            		th:text="${i}"
+            		th:onclick="|location.href='/board/notice?page =' + ${i}|"></button>
+            
+            <!-- 다음 페이지(>)  -->
+            <button class="page-btn"
+            		th:onclick="${currentPage >= totalPages} ? null : 'location.href=\'/board/notice?page=' + (${currentPage + 1}) + '\''">></button>
         </div>
     </div>
 

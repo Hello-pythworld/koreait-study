@@ -16,16 +16,17 @@
         <div class="post-detail">
             <div class="detail-header">
                 <div>
-                    <h1 id="detailTitle">공지사항 제목</h1>
+                    <h1 id="detailTitle"th:text="${notice.title}"></h1>
+                    
                     <div class="detail-meta">
-                        <span id="detailAuthor">작성자</span>
-                        <span id="detailDate">작성일</span>
+                        <span id="detailAuthor"th:text="${notice.writerName}"></span>
+                        <span id="detailDate"th:text="${#temporals.format(notice.createdAt, 'yyyy.MM.dd') }"></span>
                         <!-- 조회수 추가 -->
-                        <span id="detailViews">조회수 0</span>
+                        <span id="detailViews"th:text="'조회수 ' + ${notice.viewCount}"></span>
                     </div>
                 </div>
                 <!-- 수정, 삭제 버튼 추가 -->
-                <div class="detail-actions">
+                <div class="detail-actions" th:if"${session.LOGIN_USER != null and session.LOGIN_USER.userName == notice.writerName}">
                     <a href="announcement-edit.html" class="btn btn-secondary" style="text-decoration: none;">수정</a>
                     <button class="btn btn-secondary" onclick="deletePost()">삭제</button>
                 </div>
@@ -33,7 +34,7 @@
 
             <div id="detailImage" style="margin: 2rem 0;"></div>
             
-            <div id="detailContent" class="detail-content">
+            <div id="detailContent" class="detail-content" th:utext="${notice.content}">
                 <!-- 상세 내용 -->
             </div>
         </div>
@@ -67,11 +68,7 @@
 
     <script src="/js/script.js"></script>
     <script>
-        // 페이지 로드 시 게시글 정보 표시
-        window.addEventListener('DOMContentLoaded', function() {
-            const postId = new URLSearchParams(window.location.search).get('id') || 1;
-            displayAnnouncementDetail(postId);
-        });
+   
     </script>
 </body>
 </html>

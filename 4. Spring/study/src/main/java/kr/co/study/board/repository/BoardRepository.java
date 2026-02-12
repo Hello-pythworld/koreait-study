@@ -2,6 +2,8 @@ package kr.co.study.board.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import kr.co.study.board.entity.Board;
@@ -23,7 +25,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 	 *  @param boardType
 	 *  @return
 	 */
-	List<Board> findByBoardTypeOrderByIdDesc(String boardType);
+	Page<Board> findByBoardTypeOrderByIdDesc(String boardType, Pageable pageable);
 	
 	
 }

@@ -35,6 +35,11 @@ package kr.co.study.board.serviceimpl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -73,29 +78,77 @@ public class NoticeServiceImpl implements BoardService {
 		
 		boardRepository.save(board);
 	}
-
+	
+	
+	
+	
 	@Override
-	public List<ResBoardDTO> getBoardList() {
+	public Page<ResBoardDTO> getBoardList(int page) {
+//		0. 페이징 처리 객체
+//		 - 매개변수 : page번째 요청, 한 페이지에 3개씩, id기준 내림차순(desc)
+		Pageable pageable = PageRequest.of(page, 3, Sort.by("id").descending());
 
 		// 1️⃣ 공지사항 게시글 전체 조회
-		List<Board> boardList = boardRepository.findByBoardTypeOrderByIdDesc("NOTICE");
+		Page<Board> boardList = boardRepository.findByBoardTypeOrderByIdDesc("NOTICE", pageable);
 
 		// 2️⃣ Entity → DTO 변환
 		List<ResBoardDTO> list = new ArrayList<>();
 
 		for (Board b : boardList) {
-			ResBoardDTO response = new ResBoardDTO();
-			response.setId(b.getId());
-			response.setCategory(b.getCategory());
-			response.setTitle(b.getTitle());
-			response.setContent(b.getContent());
-			response.setWriterName(b.getWriter().getUserName());
-			response.setCreatedAt(b.getCreatedAt());
+			ResBoardDTO response = ResBoardDTO.builder()
+			.id(b.getId())
+			.category(b.getCategory())
+			.title(b.getTitle())
+			.content(b.getContent())
+			.writerName(b.getWriter().getUserName())
+			.createdAt(b.getCreatedAt())
+			.build();
 
 			list.add(response);
 		}
 
-		// 3️⃣ 반환
-		return list;
+		// 3️⃣ 응답 객체(Response DTO) 반환
+//		 - List<ResBoardDTO> 타입을 Page<ResBoardDTO>타입으로 변환
+//		 - 매개변수 : 원본 리스트, 페이징 정보(객체), db에서 조회된 Page 객체의 요소 개수
+		return new PageImpl<>(list, pageable, boardList.getTotalElements());
+	}
+//	동작순서
+//  1. 트랜잭션 시작
+//		- JPA의 영속성 컨텍스트 생성
+//		- 영속성 컨텍스트 : 엔티티의 변경을 감지하고 SQL을 저장하는 공간
+//	2. findById 호출
+//		- SELECT 실행
+//		- 영속성 컨텍스트에 1차 캐시 저장 → 스냅샷 저장소에 저장
+//	3. 나머지 메서드의 코드를 실행 (엔티티.setViewCount(5))
+//		- 1차 캐시에 변경된 값이 들어감.
+//	4. JPA의 flush() 호출
+//		- 변경 감지 수행(더티 체킹)
+//		- 변경된 값이 있으면 SQL 쿼리문 생성 후 실행
+//	5. 최종적으로 종료되며, 트랜잭션 commit 수행
+	
+	@Override
+		@Transactional
+		public ResBoardDTO getBoardDetail(Long id) {
+			
+			// 1. 게시글 조회
+			Board board = boardRepository.findById(id).orElse(null);
+			
+//			2. 조회수 증가
+//			 - JPA 더팅체킹으로 인해 update 자동 반영
+			board.setViewCount(board.getViewCount()+1);
+			
+//			3. 응답 DTO 변환
+			ResBoardDTO response = ResBoardDTO.builder()
+									.id(board.getId())
+									.title(board.getTitle())
+									.content(board.getContent())
+									.writerName(board.getWriter().getUserName())
+									.createdAt(board.getCreatedAt())
+									.viewCount(board.getViewCount())
+									.build();
+//			builder패턴의 장점 일관성이 깨지지 않는다.
+			
+			return response;
+			
 	}
 }

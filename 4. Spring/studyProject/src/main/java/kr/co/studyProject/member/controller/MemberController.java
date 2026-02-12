@@ -15,19 +15,13 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    // 🔹 테스트용
-    @GetMapping("/ping")
-    @ResponseBody
-    public String ping() {
-        return "ok";
-    }
-
-    // 🔹 회원가입 페이지
-    @GetMapping("/register/form")
-    public String registerForm() {
-        return "pages/member/signup"; // 또는 member/register
-    }
-    
+//    // 🔹 테스트용
+//    @GetMapping("/ping")
+//    @ResponseBody
+//    public String ping() {
+//        return "ok";
+//    }
+   
     // 회원가입 페이지 이동
     @GetMapping("/signup/form")
     public String signup() {
