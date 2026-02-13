@@ -26,6 +26,8 @@ public class MemberServiceImpl implements MemberService {
         member.setUserName(request.getUserName());
         member.setEmail(request.getEmail());
         member.setPassword(encodedPassword);
+        member.setNickName(request.getNickName());
+        member.setPhoneNumber(request.getPhonenumber());
 
         // 3️⃣ DB 저장
         memberRepository.save(member);

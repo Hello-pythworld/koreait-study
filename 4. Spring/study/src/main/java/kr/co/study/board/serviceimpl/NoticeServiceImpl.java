@@ -40,9 +40,11 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import kr.co.study.board.controller.NoticeController;
 import kr.co.study.board.dto.ReqBoardDTO;
 import kr.co.study.board.dto.ResBoardDTO;
 import kr.co.study.board.entity.Board;
@@ -55,29 +57,27 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class NoticeServiceImpl implements BoardService {
-	private final BoardRepository boardRepository;
-	private final MemberRepository memberRepository;
 
-	@Override
-	@Transactional
-	public void write(ReqBoardDTO request, Long writerId) {
-//	1. 작성자 조회
-		Member writer = memberRepository.findById(writerId).orElse(null);
+    private final BoardRepository boardRepository;
+    private final MemberRepository memberRepository;
 
-		if (writer == null) {
-			System.out.println("유효하지 않은 사용자입니다.");
-		}
-		
-		Board board = new Board();
-		board.setBoardType("NOTICE");
-		board.setCategory(request.getCategory());
-		board.setContent(request.getContent());
-		board.setTitle(request.getTitle());
-		board.setWriter(writer);
-		board.setViewCount(0);
-		
-		boardRepository.save(board);
-	}
+    @Override
+    @Transactional
+    public void write(ReqBoardDTO request, Long writerId) {
+        Member writer = memberRepository.findById(writerId)
+                .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 사용자"));
+
+        Board board = new Board();
+        board.setBoardType("NOTICE");
+        board.setCategory(request.getCategory());
+        board.setTitle(request.getTitle());
+        board.setContent(request.getContent());
+        board.setWriter(writer);
+        board.setViewCount(0);
+
+        boardRepository.save(board);
+    }
+	
 	
 	
 	
@@ -126,7 +126,7 @@ public class NoticeServiceImpl implements BoardService {
 //		- 변경된 값이 있으면 SQL 쿼리문 생성 후 실행
 //	5. 최종적으로 종료되며, 트랜잭션 commit 수행
 	
-	@Override
+		@Override
 		@Transactional
 		public ResBoardDTO getBoardDetail(Long id) {
 			
@@ -151,4 +151,57 @@ public class NoticeServiceImpl implements BoardService {
 			return response;
 			
 	}
+	
+	@Override
+	@Transactional
+	public ResBoardDTO getBoardDetailEdit(Long id) {
+		
+		// 1. 게시글 조회
+		Board board = boardRepository.findById(id).orElse(null);
+		
+
+//		3. 응답 DTO 변환
+		ResBoardDTO response = ResBoardDTO.builder()
+								.id(board.getId())
+								.title(board.getTitle())
+								.content(board.getContent())
+								.writerName(board.getWriter().getUserName())
+								.createdAt(board.getCreatedAt())
+								.viewCount(board.getViewCount())
+								.build();
+//		builder패턴의 장점 일관성이 깨지지 않는다.
+		
+		return response;
+		
+	}
+	@Override
+	@Transactional
+	public void edit(ReqBoardDTO request, Long id) {
+		
+		
+//		1. 기존 게시글이 존재하는지 조회
+		Board board = boardRepository.findById(request.getId()).orElse(null);
+		
+		if(board != null && !board.getWriter().getId().equals(id)) {
+			System.out.println("게시글이 없거나 작성자가 아닙니다.");
+		}
+//		2. 게시글 수정 반영
+		board.setCategory(request.getCategory());
+		board.setTitle(request.getTitle());
+		board.setContent(request.getContent());
+	}
+	@Override
+	public void delete(Long id, Long loginUserId) {
+//		1. id로 게시글 조회
+		Board board = boardRepository.findById(id).orElse(null);
+//		2. 해당하는 게시글이 존재하는지 확인 및 작성자 검증
+		if(board == null) {
+			System.out.println("삭제할 수 없습니다.");
+		} else if(!board.getWriter().getId().equals(loginUserId)) {
+			System.out.println("삭제 권한이 없습니다.");
+		}
+//		3. 삭제 처리
+		boardRepository.delete(board);
+	}
+	
 }

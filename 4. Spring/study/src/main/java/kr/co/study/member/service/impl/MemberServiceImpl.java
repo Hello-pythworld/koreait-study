@@ -3,6 +3,7 @@ package kr.co.study.member.service.impl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import kr.co.study.member.dto.ReqLoginDTO;
 import kr.co.study.member.dto.ReqRegisterDTO;
 import kr.co.study.member.dto.ResLoginDTO;
@@ -79,5 +80,7 @@ public class MemberServiceImpl implements MemberService{
 		response.setUpdatedAt(member.getUpdatedAt());
 		
 		return response;
+		
+		
 	}
 }

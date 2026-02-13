@@ -12,6 +12,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class ReqBoardDTO {
+	private Long id;
 	private String category;
 	private String title;
 	private String content;

@@ -41,6 +41,30 @@ public interface BoardService {
 	 * @param id 게시글 PK
 	 * @return
 	 */
+	/**
+	 * 게시글 수정 기능
+	 *  - id로 게시글 조회
+	 *  - 조회된 게시글의 작성자가 로그인한 작성자(id)와 일치하지 않으면
+	 *  "작성자만 수정할 수 있습니다." 출력
+	 *  - 엔티티 필드 값을 사용자가 수정한 값으로 변경
+	 *  	> JPA 더티체킹으로 인해 자동 반영
+	 * @param request
+	 * @param id
+	 */
+	
+	/**
+	 * 게시글 삭제 기능
+	 *  - id로 게시글 조회 (findById)
+	 *  - 해당하는 게시글이 없을 경우, "삭제할 수 없습니다." 출력
+	 *  - 작성자 검증(게시글 작성자와 로그인한 사용자가 일치하는지)
+	 *  - 삭제 처리
+	 * @param id 게시글의 PK
+	 * @param loginUserId 로그인한 유저의 PK
+	 */
+	 void edit(ReqBoardDTO request, Long id);
+	 void delete(Long id, Long loginUserId);
 	ResBoardDTO getBoardDetail(Long id);
 	Page<ResBoardDTO> getBoardList(int page);
+	ResBoardDTO getBoardDetailEdit(Long id);
+	
 }

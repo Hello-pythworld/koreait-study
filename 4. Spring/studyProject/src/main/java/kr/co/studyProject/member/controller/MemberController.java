@@ -2,9 +2,10 @@ package kr.co.studyProject.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.studyProject.member.dto.ReqRegisterDTO;
 import kr.co.studyProject.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 
@@ -26,5 +27,12 @@ public class MemberController {
     @GetMapping("/signup/form")
     public String signup() {
     	return "pages/member/signup";
+    }
+    
+    @PostMapping("/signup")
+    public String signup(ReqRegisterDTO dto) {
+    	memberService.register(dto);
+
+    	return "redirect:/member/login/form";
     }
 }
