@@ -17,5 +17,5 @@ public class ReqRegisterDTO {
 	private String nickName;
 	private String password;
 	private String passwordCheck;
-	private String phonenumber;
+	private String phoneNumber;
 }

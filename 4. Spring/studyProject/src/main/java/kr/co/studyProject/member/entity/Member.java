@@ -27,6 +27,7 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;   // ✅ PK는 무조건 숫자
 
+    private String userId;
     private String userName;
     private String email;
     private String nickName;

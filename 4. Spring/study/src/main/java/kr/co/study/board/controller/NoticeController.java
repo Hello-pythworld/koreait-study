@@ -1,5 +1,7 @@
 package kr.co.study.board.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
 import kr.co.study.board.dto.ReqBoardDTO;
@@ -26,6 +29,7 @@ public class NoticeController { // 공지사항 컨트롤러
 	 * 공지사항 페이지로 이동하는 메서드
 	 * 
 	 * @return notice.html
+	 * 
 	 */
 	@GetMapping
 	public String noticeList(@RequestParam(name = "page", defaultValue = "1") int page, Model model) {
@@ -86,7 +90,8 @@ public class NoticeController { // 공지사항 컨트롤러
 	}
 
 	@PostMapping("/create")
-	public String create(ReqBoardDTO request, HttpSession session) {
+	public String create(ReqBoardDTO request, HttpSession session,
+						@RequestParam(value = "files", required = false) List<MultipartFile> files) {
 //         System.out.println(request);  // request == request.toString
 //         1. 로그인한 사용자 정보 세션에서 꺼내기
 		ResLoginDTO loginUser = (ResLoginDTO) session.getAttribute("LOGIN_USER");
@@ -97,7 +102,7 @@ public class NoticeController { // 공지사항 컨트롤러
 		}
 
 //         3. 게시글 저장
-		boardService.write(request, loginUser.getId());
+		boardService.write(request, files, loginUser.getId());
 
 //         4. 목록으로 이동
 		return "redirect:/board/notice";
@@ -117,7 +122,8 @@ public class NoticeController { // 공지사항 컨트롤러
 	}
 
 	@PostMapping("/edit")
-	public String edit(ReqBoardDTO request, HttpSession session) {
+	public String edit(ReqBoardDTO request, HttpSession session,
+						@RequestParam(value = "files", required = false) List<MultipartFile> files) {
 //    	  1. 로그인한 사용자 조회
 		ResLoginDTO loginUser = (ResLoginDTO) session.getAttribute("LOGIN_USER");
 
@@ -126,7 +132,7 @@ public class NoticeController { // 공지사항 컨트롤러
 			return "redirect:/member/login/form";
 		}
 //    	  3. 게시글 수정 진행
-		boardService.edit(request, loginUser.getId());
+		boardService.edit(request, files, loginUser.getId());
 
 		return "redirect:/board/notice/detail?id=" + request.getId();
 	}

@@ -40,15 +40,16 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.transaction.Transactional;
-import kr.co.study.board.controller.NoticeController;
 import kr.co.study.board.dto.ReqBoardDTO;
 import kr.co.study.board.dto.ResBoardDTO;
+import kr.co.study.board.dto.ResBoardFileDTO;
 import kr.co.study.board.entity.Board;
 import kr.co.study.board.repository.BoardRepository;
+import kr.co.study.board.service.BoardFileService;
 import kr.co.study.board.service.BoardService;
 import kr.co.study.member.entity.Member;
 import kr.co.study.member.repository.MemberRepository;
@@ -58,12 +59,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class NoticeServiceImpl implements BoardService {
 
-    private final BoardRepository boardRepository;
-    private final MemberRepository memberRepository;
+    private final BoardRepository boardRepository; // 게시판 DB 접근
+    private final MemberRepository memberRepository; // 작성자 조회용
+    private final BoardFileService boardFileService; // 파일 전용(추가/수정/삭제) 
 
     @Override
     @Transactional
-    public void write(ReqBoardDTO request, Long writerId) {
+    public void write(ReqBoardDTO request, List<MultipartFile> files, Long writerId) {
         Member writer = memberRepository.findById(writerId)
                 .orElseThrow(() -> new IllegalArgumentException("유효하지 않은 사용자"));
 
@@ -76,6 +78,8 @@ public class NoticeServiceImpl implements BoardService {
         board.setViewCount(0);
 
         boardRepository.save(board);
+        
+        boardFileService.saveFiles(board, files);
     }
 	
 	
@@ -137,6 +141,8 @@ public class NoticeServiceImpl implements BoardService {
 //			 - JPA 더팅체킹으로 인해 update 자동 반영
 			board.setViewCount(board.getViewCount()+1);
 			
+//			3. 첨부파일 조회
+			List<ResBoardFileDTO> files = boardFileService.getFiles(board.getId());
 //			3. 응답 DTO 변환
 			ResBoardDTO response = ResBoardDTO.builder()
 									.id(board.getId())
@@ -145,6 +151,7 @@ public class NoticeServiceImpl implements BoardService {
 									.writerName(board.getWriter().getUserName())
 									.createdAt(board.getCreatedAt())
 									.viewCount(board.getViewCount())
+									.files(files)
 									.build();
 //			builder패턴의 장점 일관성이 깨지지 않는다.
 			
@@ -176,7 +183,7 @@ public class NoticeServiceImpl implements BoardService {
 	}
 	@Override
 	@Transactional
-	public void edit(ReqBoardDTO request, Long id) {
+	public void edit(ReqBoardDTO request, List<MultipartFile> files, Long id) {
 		
 		
 //		1. 기존 게시글이 존재하는지 조회
@@ -189,8 +196,11 @@ public class NoticeServiceImpl implements BoardService {
 		board.setCategory(request.getCategory());
 		board.setTitle(request.getTitle());
 		board.setContent(request.getContent());
+//		3. 파일 처리
+		boardFileService.replaceFiles(board, files);
 	}
 	@Override
+	@Transactional
 	public void delete(Long id, Long loginUserId) {
 //		1. id로 게시글 조회
 		Board board = boardRepository.findById(id).orElse(null);
@@ -200,8 +210,13 @@ public class NoticeServiceImpl implements BoardService {
 		} else if(!board.getWriter().getId().equals(loginUserId)) {
 			System.out.println("삭제 권한이 없습니다.");
 		}
-//		3. 삭제 처리
+		
+//		3. 파일 삭제(로컬 + DB)
+		boardFileService.deleteFiles(board.getId());
+		
+//		4. 삭제 처리
 		boardRepository.delete(board);
 	}
-	
+
+
 }

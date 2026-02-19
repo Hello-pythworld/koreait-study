@@ -29,14 +29,19 @@
 					</div>
 				</div>
 				<!-- 수정, 삭제 버튼 추가 -->
-				<div class="detail-actions" th:if"${session.LOGIN_USER !=null and
-					session.LOGIN_USER.userName==notice.writerName}">
-                    <a th:href="'/board/notice/edit/form?id=' + ${notice.id}" class="btn btn-secondary" style="text-decoration: none;">수정</a>
-                    <button class="btn btn-secondary" onclick="deletePost()">삭제</button>
-                </div>
+				<div class="detail-actions" th:if="${session.LOGIN_USER !=null and session.LOGIN_USER.userName==notice.writerName}">
+					<a th:href="'/board/notice/edit/form?id=' + ${notice.id}"
+						class="btn btn-secondary" style="text-decoration: none;">수정</a>
+					<button class="btn btn-secondary" onclick="deletePost()">삭제</button>
+				</div>
 			</div>
 
+
 			<div id="detailImage" style="margin: 2rem 0;"></div>
+			<div th:each=
+			"file : ${notice.files}">
+				<img th:src="${file.filePath}">
+			</div>
 
 			<div id="detailContent" class="detail-content"
 				th:utext="${notice.content}">
@@ -72,9 +77,10 @@
 			<form action="/board/notice/delete">
 				<input type="hidden" name="id" th:value="${notice.id}">
 				<div class="form-actions">
-					<button type="submit" class="btn btn-primary" onclick="confirmDelete()"
-							style="background-color: var(--error);">삭제</button>
-					<button type="button" class ="btn btn-secondary" onclick="closeDeleteModal()">취소</button>
+					<button type="submit" class="btn btn-primary"
+						onclick="confirmDelete()" style="background-color: var(--error);">삭제</button>
+					<button type="button" class="btn btn-secondary"
+						onclick="closeDeleteModal()">취소</button>
 				</div>
 			</form>
 
