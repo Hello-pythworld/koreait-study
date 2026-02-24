@@ -22,7 +22,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-	implementation 'org.springframework.boot:spring-boot-starter-web:3.5.10'
+	implementation 'org.springf0ramework.boot:spring-boot-starter-web:3.5.10'
 	implementation 'org.springframework.boot:spring-boot-devtools:3.5.10'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.5.10'
 	implementation 'org.projectlombok:lombok:1.18.38'

@@ -1,16 +1,19 @@
-package kr.co.restStudy;
+package kr.co.restStudy.board.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Member {
+@ToString
+public class ReqBoardDTO {
 	private Long id;
-	private String name;
-	private String addr;
+	private String category;
+	private String title;
+	private String content;
 }

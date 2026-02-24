@@ -1,4 +1,4 @@
-package kr.co.restStudy;
+package kr.co.restStudy.global.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

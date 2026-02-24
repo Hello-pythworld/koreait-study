@@ -1,0 +1,66 @@
+#external-style {
+    color: aqua;
+    font-size: 26px;
+}
+/*
+전체 선택자
+* {
+    color:antiquewhite;
+}
+
+/* 클래스 선택자 */
+.color_blue {
+    color:blue;
+}
+
+.small_font {
+    font-size: 10px;
+}
+
+/* 아이디 선택자 */
+#aqua_font {
+    color: aqua;
+}
+
+/* 속성 선택자 */
+input[type="text"] {
+    background-color: blue;
+}
+
+.input-password[type="password"] {
+    background-color: aquamarine;
+}
+
+/* 그룹 선택자 */
+.btn, .color_red {
+    color: red;
+}
+
+/* 자식 선택자 */
+div > h2 {
+    color:darkblue;
+}
+
+/* 후손 선택자 */
+div p {
+    color:blueviolet;
+}
+
+/* 동위 선택자 ~와 +의 차이 숙지할 것 */
+h2 ~ ul {
+    color:greenyellow;
+}
+
+/* 반응 선택자 */
+.reaction-btn:hover {
+    background-color:chocolate;
+}
+
+.reaction-btn:active {
+    background-color:darkslateblue;
+}
+
+.reaction-input:focus {
+    color: red;
+    cursor: wait;
+}
