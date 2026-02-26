@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root{
+            --body-color: #f4f6f9;
+        }
+        * {
+            margin:0;
+            padding: 0;
+        }
+        body {
+            background-color: var(--body-color);
+            padding:40px;
+        }
+
+        /* Header 디자인 */
+        header {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        /* Card 디자인 */
+        .container {
+            display: flex;
+            height: 100px;
+            /* flex 안에 있는 아이템들간의 간격 */
+            gap:20px;
+            /* 줄바꿈 여부(nowrap은 줄바꿈 안함, wrap은 줄바꿈) */
+            flex-wrap: wrap;
+        }
+        .card {
+            padding: 25px;
+            border-radius: 10px;
+            flex-grow: 1;
+            flex-shrink: 1;
+            /* 25%에서 20px을 뺀 만큼만 크기를 가짐 */
+            flex-basis: calc(20% - 20px);
+            background-color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .title {
+            color: #555;
+            font-weight: 700;
+        }
+
+        .number {
+            margin: 10px 0;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .description {
+            font-size: 12px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <header>Admin DashBoard</header>
+
+    <div class="container">
+        <div class="card">
+            <p class="title">Total Users</p>
+            <p class="number">1,245</p>
+            <p class="description">active this month</p>
+        </div>
+        <div class="card">
+            <p class ="title">Revenue</p>
+            <p class ="number">$12,430</p>
+            <p class ="description">this month</p>
+        </div>
+        <div class="card">
+            <p class ="title">Orders</p>
+            <p class ="number">320</p>
+            <p class ="description">Completed</p>
+        </div>
+        
+        <div class="card">
+            <p class="title">New Signups</p>
+            <p class="number">89</p>
+            <p class="description">Today</p>
+        </div>
+    </div>
+</body>
+</html>

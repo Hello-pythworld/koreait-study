@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button {
+            border: none;
+            height:100px;
+            flex: 1 1 30%;
+        }
+        body {
+            margin: 0;
+        }
+        .navbar {
+            border-radius:5px;
+            background: black;
+            padding: 8px;
+            margin-bottom: 50px;
+        }
+        .navbar ul {
+            list-style:none;
+            display:flex;
+            align-items:center;
+            justify-content: space-between;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+        }
+        .menu-right {
+            display: flex;
+            gap: 20px;
+            padding-right: 30px;
+        }
+        .button-group {
+            display: flex;
+            flex-wrap:wrap;
+            gap:8px;
+        }
+
+    </style>
+</head>
+    
+<body>
+    <nav class ="navbar">
+    <ul>
+        <li>
+            <a href="">My Company</a>
+        </li>
+        <div class="menu-right">
+        <li>
+            <a href="">Home</a>
+        </li>
+        <li>
+            <a href="">about</a>
+        </li>
+        <li>
+            <a href="">Service</a>
+        </li>
+        <li>
+             <a href="">Contact</a>
+        </li>
+        </div>
+    
+    </nav>
+    <div class="button-group">
+    <button>Service1</button>
+    <button>Service2</button>
+    <button>Service3</button>
+    <button>Service4</button>
+    <button>Service5</button>
+    <button>Service6</button>
+</div>
+</ul>
+</body>
+</html>
