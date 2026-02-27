@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            /* animation-name: grow;
+            animation-duration: 5s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: 5; */
+            animation: grow 2s ease-in-out infinite;
+        }
+
+
+        /*
+            transform
+            scale: 크기 변화
+                > 기본값 1 (원래 크기)
+                > ex.transform: scale(1.5)
+                - scaleX : X축(좌우) 크기 변화
+                - sclaeY : Y축(위아래) 크기 변화
+                - rotate : 회전
+                    > transform: rotate(180deg)
+                - translate : 이동
+                    > translate(100px) : x축으로 100px 이동
+                        translateX와 동일하게 동작
+                    > trnaslateY(200px) : y축으로 200px 이동
+                    - skew : 기울기
+                        > skew(180deg) : 180도 기울기
+                    - opacity: 투명도
+                        > opacity(0.5) : 투명도 0.5
+
+        */
+
+        @keyframes grow {
+            0% {
+                transform: skew(0);
+                background-color: blue;
+            }
+            50% {
+                transform: skew(180px);
+                background-color: black;
+            }
+            100% {
+                transform: skew(360px);
+                background-color: red;
+            }
+            
+        }
+            button:active {
+                transform: translateY(300px);
+            }
+
+            .box2 {
+                width: 200px;
+                height: 200px;
+                background-color:blueviolet;
+                animation: combo 5s linear infinite;
+            }
+
+            @keyframes combo {
+                0% {
+                    transform: translateX(0) rotate(0deg) scale(1);
+                    opacity: 0;
+                }
+                100% {
+                    transform: translateX(200px) rotate(360deg) scale(1.5);
+                    opacity: 1;
+                }
+            }
+    </style>
+</head>
+<body>
+    
+    <div class="box1"></div>
+    <button>여기를 클릭하세요!!!</button>
+
+    <hr>
+    <div class="box2"></div>
+</body>
+</html>

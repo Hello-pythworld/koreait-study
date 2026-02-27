@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let age = 19;   // number
+        let name = "이영훈"; // string
+        let flag = true; // boolean
+        let check; // undefined
+        let hobby = ["잠자기", "먹기", "자기"]; //object - array
+        let info = { // object
+            name: "홍길동",
+            age : 22,
+            flag : false
+        }
+        let nameSymbol =Symbol("name"); // symbol
+        let bigint = BigInt("122315646545321341654564321321635465845416351") // bigint
+
+        console.log(name);
+        console.log(hobby[1]);
+        console.log(info.age);
+
+        let uniqueKeySymbol_1 = Symbol("name");
+        let uniqueKeySymbol_2 = Symbol("name");
+
+        console.log(uniqueKeySymbol_1 == uniqueKeySymbol_2);
+
+        let obj = {
+            [uniqueKeySymbol_1] : "이영훈",
+            [uniqueKeySymbol_2] : "홍길동"
+        }
+
+        console.log(obj);
+
+        let num1 = 9073249087230854723809;
+        console.log(num1+3);
+        let num2 = 9073249087230854723810;
+        console.log(num2+3);
+        let num3 = BigInt(9073249087230854723810);
+        console.log(num3+3n);
+
+        let person_age = "열아홉살";
+        console.log(typeof person_age);
+        console.log(+person_age);
+        console.log(typeof person_age);
+
+        console.log(('b' + 'a'+ + 'a' + 'a').toLowerCase());
+    </script>
+</body>
+</html>

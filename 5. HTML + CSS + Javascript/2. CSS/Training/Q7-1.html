@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color:#87CEEB;
+        align-items:center;
+        display: flex;
+        justify-content: center;
+        height:100vh;
+        gap:5px;
+    }
+    .ballgroup{
+        
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(2); }
+        100% {transform: scale(1); }
+    }
+    @keyframes fadeInOut {
+        0% { opacity: 1; }
+        50% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+    @keyframes squeeze {
+        0% { margin: 0 20px; }
+        50% { margin: 0 2px; }
+        100% { margin: 0 20px; }
+    }
+
+    .ball {
+        width:40px;
+        height:40px;
+        border-radius:100%;
+        animation: fadeInOut 5s ease-in-out infinite, pulse 5s ease-in-out infinite, squeeze 5s ease-in-out infinite;
+        background-color: #4682B4;
+    }
+</style> 
+<body>
+    <div class="ball group"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+    <div class="ball"></div>
+</body>
+</html>

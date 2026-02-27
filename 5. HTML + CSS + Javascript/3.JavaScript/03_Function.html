@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="add(10,20)">10 + 20</button>
+    <script>
+        function add(num1, num2) {
+            alert(num1 + num2);
+        }
+    </script>
+    <!-- 
+        1. 사용자 입력 받는 건 prompt() 사용
+        2. 버튼 클릭하면 함수 호출
+            ex. onclick= "Q1()"
+    -->
+    <hr>
+    <button onclick="Q1()">Q1</button>
+    <script>
+        function Q1() {
+            let birthYear = parseInt(prompt("출생연도 입력 : "));
+            let age = 2026 - birthYear;
+
+            alert("당신의 나이는 " + age + "세 입니다.");
+        }
+    
+    <hr>
+    <!-- 국어, 영어, 수학 점수를 입력받아 평균을 계산하여 출력하세요. -->
+    <button>Q2</button>
+    let korean = prompt("국어 점수를 입력하세요.");
+    <hr>
+    <button>Q3</button>
+    <hr>
+    <!-- 두 개의 숫자를 입력 받아 더 큰 숫자를 출력하세요. -->
+    <button>Q4</button>
+    <hr>
+    <!-- 숫자 1개를 입력받아 짝수인지 홀수인지 출력하세요. -->
+    <button>Q5</button>
+    <hr>
+    <!-- 사용자가 입력한 구구단을 출력하세요.(ex. 2 입력하면 2단 출력) -->
+    <button>Q6</button>
+    <hr>
+    <!-- 숫자 1개를 입력받아 1부터 N까지의 합을 계산하고, 출력하세요. -->
+    <button>Q7</button>
+    <hr>
+    <!-- 사용자로부터 이름을 입력받아 Alice일 경우 "다시 돌아오신걸 환영합니다!" 출력
+     bob일 경우 "안녕히가세요!" 출력
+     그 외에는 "[이름]님 어서오세요! 출력"-->
+    <button>Q8</button>
+
+
+</body>
+</html>
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Document</title>
+ </head>
+ <body>
+         <script>
+         function calc() {
+//             let num1 = parseInt(prompt("첫 번째 숫자 입력 : "));
+//             let num2 = parseInt(prompt("두 번째 숫자 입력 : "));
+//             let operation = prompt("원하는 연산 입력(+, - *, /) : ")
+//             let result;
+
+//             switch(operation) {
+//                 case "+":
+//                     result = num1 + num2;
+//                     break;
+//                 case "-":
+//                     result = num1 - num2;
+//                     break;
+//                 case "*":
+//                     result = num1 * num2;
+//                     break;
+//                 case "/":
+//                     if(num1 !== 0 && num2 !== 0){
+//                     result = num1 / num2;
+//                     }
+//                     break;
+//                 default:
+//                     console.log("잘못된 연산입니다.");
+//                     break;
+//             }
+
+//             console.log("계산된 결과는 "+ result + " 입니다.");
+//         }
+//         calc();
+//     </script>
+// </body>
+// </html>
