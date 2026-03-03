@@ -104,6 +104,7 @@
                 break;
                 case "bob": 
                 alert("안녕히 가세요!");
+
                 break;
                 default:
                 alert(`${name}님 어서오세요!`);
@@ -111,5 +112,141 @@
             } 
         }
     </script>
+    <!-- --------------------------------------------------------------------------------------------------------------- -->
+     <hr>
+     <script>
+        // 1. 일반 함수
+        // - 가장 일반적으로 사용되는 함수
+        // - 호이스팅 가능
+        func1("hi");
+        function func1(str) {
+            console.log(str);
+        }
+
+        // 2. 익명 함수
+        //  - 이름이 없는 함수
+        //  - 자주 쓰이는 곳 : 이벤트 처리, 콜백, 클로저, ...
+        const func2 = function(str) {
+            console.log(str);
+        }
+        // 3. 화살표 함수
+        // - 코드의 라인을 줄이기 위해 사용
+        // this 바인딩 방식과 객체 생성, 구조 등이 일반 함수와 다름.
+        const func3 = (num1, num2) => num1 + num2;
+
+        //  - 매개변수 1개일 때 : 소괄호 생략 가능
+        const square = num1 => num1 * num1;
+        // - 매개변수가 없을 때 : 비어있는 소괄호만 작성
+        const printHellow = () => "Hello";
+        console.log(printHellow);
+        console.log(printHellow());
+        console.log(typeof printHellow);
+
+        // 여러줄 작성할 때 : 중괄호 사용
+        const add2 = (num1, num2) => {
+            let result = num1 + num2;
+            return result;
+        }
+
+        // 4. 생성자 함수
+        //  - 객체를 생성하여 재사용하기 위해 사용
+        //  - 관례적으로 생성자 함수는 앞 글자를 대문자로 표시
+        function Person(name, age) {
+            this.name = name;
+            this.age = age;
+            this.walk = function() {
+                console.log(this.name + " 걷는 중");
+            }
+        }
+
+        const p1 = new Person("이영훈", 19);
+        const p2 = new Person("홍길동", 22);
+
+        console.log(p1);
+        console.log(p2);
+
+        console.log(p1.name);
+        p1.walk();
+        // 5. 내부함수와 재귀함수
+        //  - 내부 함수 : 함수 안에 또 다시 정의된 함수
+        //  - 재귀 함수 : 자기 자신을 호출하는 함수
+
+        // 내부 함수
+        function outer() {
+            let x = 10;
+
+            function inner() {
+                console.log(x);
+            }
+
+            inner();
+        }
+
+        outer();
+        // 재귀 함수
+        function countdown(cnt) {
+            if(cnt === 0) {
+                console.log("0이 되었습니다.");
+            } else {
+                console.log(cnt);
+                countdown(cnt-1); // 재귀 호출
+            }
+        }
+
+        // 6. 콜백 함수
+        //  - 매개변수에 함수가 들어오는 방식
+        function first(callback) {
+            console.log("First");
+
+            if(typeof callback === "function") {
+                callback();
+            }
+        }
+        
+        // 함수를 호출할 때 인자로 함수를 전달
+        first(function() {
+            console.log("Second");
+        })
+
+
+        function processUser(name, callback) {
+            console.log("--- 요청 시작 ");
+            // console.log(name + "님 어서오세요!");
+            callback(name);
+            console.log("--- 요청 종료 ---");
+        }
+
+        // 1) 개발자 A는 "OOO님 환영합니다!" 출력
+        processUser("이영훈", function(name) {
+            console.log(name + "님 환영합니다!");
+        })
+
+        // 2) 개발자 B는 "OOO님이 로그인 하셨습니다." 출력
+        //  - 함수 미리 만들고 전달하기
+        function developerB(name) {
+            console.log(name + "님이 로그인하셨습니다!");
+        }
+
+        processUser("홍길동", developerB);
+        // 3) 개발자 C는 "접속 완료!" 출력
+        processUser("철수", (name) => {
+            console.log("접속 완료!");
+        })
+
+        function calc(a, b, operation) {
+            return operation(a, b);
+        }
+
+        // 1) 더하는 기능을 가진 함수
+        // - ex) 3 + 4
+        calc(1, 2, function(a, b){
+            console.log(a+b);
+        });
+        // 2) 곱하는 기능을 가진 함수
+        // - ex) 10 * 6
+        calc(4, 6, function(a, b){
+            console.log(a * b);
+        });
+        </script>
 </body>
 </html>

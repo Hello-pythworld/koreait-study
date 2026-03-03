@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box-class">Box 1</div>
+    <div class="box-class">Box 2</div>
+    <div class="box-class">Box 3</div>
+    <div id ="box-id">Box 4</div>
+    <div id ="box-id">Box 5</div>
+    <script>
+        let box = document.getElementById("box-id");
+        // 텍스트 노드 조작
+        //  - textContent (사용 권장.)
+        //  - innerHTML
+        //  - innerText (사용 권장하지 않음.)
+        box.textContent = "속성 조작중"
+        // box.innerHTML = "asd"
+        console.log(box);
+
+        let boxes = document.getElementsByClassName("box-class");
+        console.log(boxes);
+
+        for(let i=0; i<boxes.length; i++) {
+            console.log(boxes[i]);
+        }
+
+    </script>
+
+    <hr>
+    <input type ="text" id="userId" placeholder="아이디를 입력해주세요.">
+    <button onclick="submitId()">제출</button>
+    <div id="msg" style="color: red; font-size:12px;"></div>
+
+    <script>
+        // 아이디가 비어있거나 20자 이상이면 안내 문구 생성하기
+        function submitId() {
+            let userId = document.getElementById("userId").value;
+            let msg = document.getElementById('msg');
+
+            if(userId === "") {
+                msg.style.color = 'red';
+                msg.style.fontSize = '12px';
+                msg.textContent = "아이디를 입력해주세요.";
+            } else if(userId.length >= 20) {
+                msg.style.color = 'red';
+                msg.style.fontSize = '12px';
+                msg.textContent = "아이디는 20자 미만으로 작성해주세요.";
+            } else {
+                msg.style.color = 'blue';
+                msg.style.fontSize = '12px'
+                msg.textContent = "사용가능한 아이디입니다.";
+                // "사용 가능한 아이디입니다."
+                // 색은 blue
+            }
+        }
+    </script>
+    <input type-="text" id="todo-input">
+    <button onclick="todoFunc()">추가하기</button>
+    <ul id="todo-list">
+        <li>먹기</li>
+
+    </ul>
+
+    <script>
+        function todoFunc() {
+            const todoInput = document.getElementById('todo-input');
+            const todoList = document.getElementById('todo-list');
+
+            console.dir(todoInput)
+            console.error("asdsasdfasf")
+
+            // 요소 생성하기
+            const todoItem = document.createElement("li") // <li></li>
+            todoItem.textContent = todoInput.value; // <li>놀기</li>
+
+            // ul 요소의 자식으로 추가하기
+            todoList.appendChild(todoItem);
+
+            todoInput.textContent = "a";
+        }
+    </script>
+<hr>
+    <script>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>나이</th>
+            </tr>
+        </thead>
+        <tbody id="tbody-id">
+            <!-- 여기에 추가 -->
+        </tbody>
+    </table>
+
+    </script>
+    <input type="text" id="table-name">
+    <input type="text" id="table-age">
+    <button onclick="addTable()">추가하기</button>
+    <script>
+        function addTable() {
+            // 1. 필요한 요소 가져오기
+            const name = document.getElementByID('table-name').value;
+            const age = document.getElementById('table-age').value;
+            const tbody = document.getElementById('tbody-id');
+            // 2. 요소 추가하기
+            const nameTd = document.createElement("td"); // <td></td>
+            const ageTd = document.createElemnt("td"); // <td></td>
+            const tr = documnet.createElement("tr"); // <tr></tr>
+            // 3. 텍스트 노드 추가하기
+            nameTd.textContent = name; // <td>김재섭</td>
+            ageTd.textContent = age; // <td>19</td>
+            // 4. 자식 요소로 추가하기(DOM Tree에 이어붙이기)
+
+            /*
+                <tr>
+                    <td>이영훈</td>
+                    <td>19</td>
+                </tr>
+            */
+            tr.appendChild(nameTd);
+            tr.appendChild(ageTd);
+            
+            tbody.appendChild(tr);
+        }
+    </script>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+</body>
+</html>
