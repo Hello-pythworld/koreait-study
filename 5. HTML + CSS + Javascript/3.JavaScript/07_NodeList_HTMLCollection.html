@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: 5px;
+            padding: 10px;
+            background-color: darkgray;
+        }
+    </style>
+</head>
+<body>
+    <h2>NodeList vs HTMLCollection</h2>
+
+    <div class="test-div" name="div-name">Div 1</div>
+    <div class="test-div" name="div-name">Div 2</div>
+    
+    <button id="add-div" onclick="addFunc()">추가하기</button>
+    <button id="log-elements" onclick="getLogs()">로그 확인하기</button>
+    
+    <script>
+        // NodeList (정적)
+        let nodeList = document.getElementsByName('div-name');
+
+        // HTMLCollection (동적)
+        let htmlCollection = document.getElementsByClassName('test-div');
+
+        // 1개의 요소만 가지고 오기 때문에 객체
+        let selector = document.querySelector('.test-div');
+        console.log(selector)
+
+        // NodeList
+        let selectorAll = document.querySelectorAll('.test-div');
+        console.log(selectorAll)
+
+        function addFunc() {
+            let newDiv = document.createElement("div");
+            newDiv.className ="test-div";
+            newDiv.name = "div-name";
+            newDiv.textContent = "New Div";
+            document.body.appendChild(newDiv);
+        }
+
+        function getLogs() {
+            console.log("=== NodeList (정적) === ");
+            console.log(nodeList);
+
+            console.log("=== HTMLCollection (동적) ====");
+            console.log(htmlCollection);
+        }
+    </script>
+</body>
+</html>

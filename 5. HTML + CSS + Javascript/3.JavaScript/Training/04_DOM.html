@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS DOM Practice</title>
+</head>
+
+<body>
+    <fieldset>
+        <legend>문제1</legend>
+        <h4>div 태그의 배경색을 빨간색으로 변경하세요.</h4>
+        <div id="my-div">이 div의 배경색을 변경하세요.</div>
+        <button onclick="changeBackgroundColor()">배경색 변경</button>
+        <script>
+            function changeBackgroundColor() {
+            const div = document.getElementById('my-div');
+            div.style.backgroundColor = 'red';
+        }
+        </script>
+    </fieldset>
+
+    <fieldset>
+        <legend>문제2</legend>
+        <h4>이미지를 클릭하면 이미지의 크기가 2배로 확대되도록 작성하세요.</h4>
+        <img id="my-image" src="https://picsum.photos/200/150" width="200" height="150" onclick="zoomImage()">
+        <script>
+            
+        </script>
+    </fieldset>
+
+    <fieldset>
+        <legend>문제3</legend>
+        <h4>input에 입력한 값을 todo 리스트에 추가하세요.</h4>
+        <input type="text" id="todo-input" placeholder="할 일을 입력하세요">
+        <button onclick="addTodo()">추가</button>
+        <ul id="todo-list">
+
+        </ul>
+    </fieldset>
+
+    <fieldset>
+        <legend>문제4</legend>
+        <h4>버튼을 클릭하면 p태그의 배경색을 변경하세요.</h4>
+        <p id="color-text">이 문단의 배경색을 변경하세요.</p>
+        <button>빨간색 배경</button>
+        <button>노란색 배경</button>
+        <button>아쿠아색 배경</button>
+    </fieldset>
+
+    <fieldset>
+        <legend>문제5</legend>
+        <h4>입력값에 따라 링크를 생성하세요.</h4>
+        <p style="margin:0px">네이버 https://www.naver.com</p>
+        <p style="margin:0px">다음 https://www.daum.net</p>
+        <p style="margin:0px; margin-bottom: 20px;">구글 https://www.google.com</p>
+        <input type="text" id="link-input" placeholder="네이버 / 다음 / 구글">
+        <button onclick="addLink()">링크 추가</button>
+        <ul id="link-list">
+
+        </ul>
+    </fieldset>
+    
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>

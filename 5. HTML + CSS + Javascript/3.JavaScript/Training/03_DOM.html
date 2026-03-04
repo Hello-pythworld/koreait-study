@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <fieldset>
+        <legend>문제1</legend>
+        <h4>input 태그에 값을 입력하고 버튼을 클릭하였을 때, 값이 숫자인지 아닌지 출력 해주세요.</h4>
+        <h5>값이 숫자라면 : "숫자입니다." 숫자가 아니면 "숫자가 아닙니다."를 alert으로 출력</h5>
+        <h6>힌트 : isNaN()을 사용하여 판별하세요.</h6>
+        <input type="text" id="num-is-nan">
+        <button onclick="Q1();">판별</button>
+        <script>
+            function Q1() {
+                const value = document.getElementById('num-is-nan').value;
+                if(isNaN(value)) {
+                    alert("숫자가 아닙니다.");
+                } else {
+                    alert("숫자입니다.");
+                }
+            }
+        </script>
+    </fieldset>
+
+    <fieldset>
+        <legend>문제2</legend>
+        <h4>input 태그에 입력된 값으로 table을 생성해주세요.</h4>
+        이름 : <input type="text" id="name"> <br>
+        나이 : <input type="text" id="age"> <br>
+        성별 : <input type="text" id="gender"> <br>
+        <button onclick="Q2();">생성</button>
+        <table id="tb" style="border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th style="border: 1px solid black;">이름</th>
+                    <th style="border: 1px solid black;">나이</th>
+                    <th style="border: 1px solid black;">성별</th>
+                </tr>
+            </thead>
+            <tbody id="insert">
+                
+            </tbody>
+        </table>
+                <script>
+                    function Q2() {
+                        const name = document.getElementById('name').value;
+                        const age = document.getElementById('age').value;
+                        const gender = document.getElementById('gender').value;
+
+                        const tbody = document.getElementById('insert');
+                        tbody.innerHTML += `<tr>
+                        <td style="border: 1px solid black;">${name}</td>
+                        <td style="border: 1px solid black;">${age}</td>
+                        <td style="border: 1px solid black;">${gender}</td>
+                    </tr>`;
+                    }
+                </script>
+
+
+    </fieldset>
+
+    <fieldset>
+        <legend>문제3</legend>
+        <h4>전체선택버튼을 클릭하면 체크항목을 모두 체크하거나 모두 해제해주세요.</h4>
+        <h6>힌트 : input 요소의 checked 속성이 true일 경우 체크되며 false일 경우 체크 해제됩니다.</h6>
+        <input type="checkbox" name="leng" value="all" id="all-chk" onclick="Q3();"> 전체선택 <br>
+        <script>
+            function Q3() {
+                const allChk = document.getElementById('all-chk').checked;
+                const checkboxes = document.getElementsByName('leng');
+                for(let i = 0; i < checkboxes.length; i++) {
+                    checkboxes[i].checked = allChk;
+                }
+            }
+        </script>
+        <input type="checkbox" name="leng" value="java"> Java <br>
+        <input type="checkbox" name="leng" value="database"> DataBase <br>
+        <input type="checkbox" name="leng" value="web"> Web
+    </fieldset>
+
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+
+</html>

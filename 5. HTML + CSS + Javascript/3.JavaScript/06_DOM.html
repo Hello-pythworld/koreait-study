@@ -30,6 +30,61 @@
 
     </script>
 
+    <div id="text-example">
+        <strong>스트롱 태그!</strong>
+        <span style="display:none">숨겨진 텍스트</span>
+    </div>
+    <script>
+        console.log("============================");
+        let textExample = document.getElementByID('text-example');
+        // 해당 노드가 가지고 있는 모든 텍스트 노드
+        //  - HTML 태그는 렌더링 X
+        // ***** 주로 사용
+        console.log("textContent");
+        console.log(textExample.textContent);
+
+        // 해당하는 요소의 모든 HTML 컨텐츠를 가져옴
+        //  - HTML 태그 렌더링 O
+        console.log("innerHTML");
+        console.log(textExample.innerHTML);
+
+        // 해당하는 요소의 모든 텍스트 노드
+        //  - HTML 태그 렌더링 X
+        //  - 단, CSS의 영향을 받음
+        //      > display:none은 안 가져오기 등
+        console.log("innerText");
+        console.log(textExample.innerText);
+
+        console.log("============================")
+    </script>
+
+    <hr>
+    <input type="text" id="test-input">
+    <button onclick="testAdd()">추가</button>
+
+    <div id="result"></div>
+
+
+    <script>
+        function testAdd() {
+            let value = document.getElementById('test-input').value;
+            let result = document.getElementById('result')
+
+            result.innerHTML = value;
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
     <hr>
     <input type ="text" id="userId" placeholder="아이디를 입력해주세요.">
     <button onclick="submitId()">제출</button>
