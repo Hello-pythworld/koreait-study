@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>window 객체 : 자바스크립트 최상위 객체</p>
+
+    <h3>window.open()</h3>
+    <button onclick="windowFunc()">클릭</button>
+
+    <script>
+        function windowFunc() {
+            window.open("https://www.naver.com", "asd", "width=500, height=500");
+        }
+    </script>
+
+    <hr>
+    <h3>타이머 관련 함수</h3>
+    <ol>
+        <li>setTimeout</li>
+        <li>setInterval</li>
+    </ol>
+
+    <button onclick="timerFunc()">클릭</button>
+
+    <script>
+        function timerFunc() {
+            // 5000 = 5s
+            // 특정 시간이 지나고 나서 코드를 실행.
+            // setTimeout(() => {
+            //     alert("안녕하세요")
+            // }, 5000)
+
+            const newNaver = window.open("https://www.naver.com");
+            newNAver.alert("안녕하세요");
+
+            setTimeout(() => {
+                newNaver.close()
+            }, 5000)
+        }
+    </script>
+
+    <div id="current-date"></div>
+    <button onclick="currentDate()">시간 확인</button>
+    
+    <script>
+        function currentDate() {
+            const currentDate = document.getElementById('current-date');
+
+            // 1000 -> 1s
+            // 1초마다 특정 코드 실행
+            let intervalObj = setInterval(() => {
+                currentDate.textContent = new Date();
+            }, 1000)
+
+            setTimeout(() => {
+                clearInterval(intervalObj);
+            }, 5000)
+        }
+    </script>
+
+    <hr>
+    <h3>BOM (Browser Object Model)</h3>
+    <p>브라우저를 JavaScript가 제어하기 위한 객체 모델
+
+    </p>
+    <ol>
+        <li>document (DOM)</li>
+        <li>location</li>
+        <li>screen</li>
+        <li>navigator</li>
+        <li>history</li>
+    </ol>
+
+    <button onclick="location.href='https://www.naver.com'">location</button>
+    <button onclick="console.log(screen)">스크린</button>
+    <button onclick="console.log(navigator)">네비게이터</button>
+    <button onclick="console.log(history)">히스토리</button>
+    <button onclick="history.back()">히스토리</button>
+</body>
+</html>

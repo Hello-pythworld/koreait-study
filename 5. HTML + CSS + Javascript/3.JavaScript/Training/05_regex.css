@@ -1,0 +1,82 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+}
+section {
+    background: #fff;
+    width: 350px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+input, textarea {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+textarea {
+    resize: none;
+    height: 80px;
+}
+button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+button:hover {
+    background-color: #0056b3;
+}
+.msg {
+    font-size: 0.8rem;
+    margin-top: 5px;
+    min-height: 15px;
+}
+/* 포트폴리오 리스트용 스타일 */
+#portfolio-list {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.portfolio-item {
+    background: #f8f9fa;
+    padding: 10px;
+    border-left: 4px solid #007bff;
+    border-radius: 4px;
+}
+.char-count {
+    font-size: 0.8rem;
+    color: #666;
+    text-align: right;
+    margin-top: 5px;
+}

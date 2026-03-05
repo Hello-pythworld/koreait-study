@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const user = {name: "이영훈", age: 19, addr: "인천"};
+
+        // 변수명은 객체의 키와 동일하게 설정.
+        const { name, age, addr } = user;
+        console.log(name);
+        console.log(age);
+        console.log(addr);
+
+        // 순서에 맞게 작성
+        const animals = ['dog', 'cat', 'pig'];
+
+        const [ first, second, third ] = animals;
+        console.log(first);
+        console.log(second);
+        console.log(third);
+    </script>
+</body>
+</html>

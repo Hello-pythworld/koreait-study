@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const name = "김재섭";
+        const age = 19;
+
+        const introduce = introduceTag`안녕하세요. 제 이름은 ${name} 이며, 나이는 ${age}세 입니다.`;
+        console.log(introduce);
+
+        function introduceTag(strings, name, age) {
+            console.log(strings);
+            console.log(name);
+            console.log(age);
+        }
+
+        const multiLine = `이렇게
+        여러줄도
+        사용
+        가능`;
+        
+        console.log(multiLine);
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        console.log("Hello, World!");
+        
+        setTimeout(() => {
+            console.log("Async!!!");
+    }, 3000);
+
+    console.log("go");
+
+    </script>
+
+    <script>
+        // 콜백 함수
+        function getUserData(callback) {
+            setTimeout(() => {
+                const userData = {name: "홍길동", age : 25};
+                callback(userData);
+            }, 1000)
+        }
+
+        getUserData(function(data) {
+            console.log(data);
+        })
+
+        function printMessage(message, callback) {
+            callback(message);
+        }
+
+        printMessage("Hello, JavaScript!", function(message) {
+            console.log(message);
+
+
+        })
+        function addAndCallback(num1, num2, callback) {
+            callback(num1+num2)
+        }
+        addAndCallback(5, 10, (result) => {
+            console.log(result);
+        });
+    </script>
+
+    <script>
+        // 프로미스(PromisE)
+        //  - 콜백 지옥을 해결하기 위해 등장한 비동기 처리를 위한 객체
+
+        // 프로미스 메서드
+        //  - resolve : 작업 성공 시
+        //  - reject : 작업 실패 시
+
+        // 프로미스 상태
+        //  - pending : 작업이 완료되지 않은 상태 (대기 상태)
+        //  - fullfilled : 작업이 성공적으로 완료된 상태 (완료 상태)
+        //  - rejected : 작업이 실패한 상태 (실패 상태)
+        function getUser() {
+            return new Promise((resolve, reject)=> {
+                const user = { name:"홍길동", age:22};
+                // resolve(user); // 작업 성공 시 user 객체를 던져주겠다.
+                reject("작업 실패!!!");
+        })
+    }
+    getUser()
+        .then((data) => { // 작업 성공 시 (resolve 호출 시 실행되는 영역)
+            console.log(data);
+        })
+        .catch((errorMsg) => {
+            console.error(errorMsg);
+        })
+    </script>
+</body>
+</html>

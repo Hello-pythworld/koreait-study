@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+        // 1. 스프레드 연산자
+        //  - 배열, 문자열과 같은 반복 가능한 객체를 개별 요소로 분리
+        const numbers = [1, 2, 3, 4, 5];
+        const str = "Hello, World!";
+
+        console.log(...numbers);
+        console.log(...str);
+
+        function spreadFunc(num1, num2, num3, num4, num5) {
+            console.log(num1);
+        }
+        spreadFunc(...numbers);
+        // 2. 레스트 연산자
+        //  - 스프레드 연산자가 요소를 분리하는 거였다면, 레스트 연산자는
+        //    요소를 하나로 모아주는 연산자
+        const arr = [1, 2, 3, 4, 5];
+
+        function restFunc(...numbers) {
+            console.log(numbers)
+        }
+
+        restFunc(1, 2, 3, 4, 5);
+        
+        // 3. 배열 병합
+        const arr1 = [10, 20, {name:"이영훈", age:19}];
+        const arr2 = [300, 400, {name:"홍길동", age:22}];
+
+        const mergeArr = [...arr1, ...arr2];
+        console.log(mergeArr);
+
+        mergeArr[0] = 999;
+        mergeArr[2].name = "짱구";
+        mergeArr[3] = 777;
+        mergeArr[5].name = "철수";
+
+        console.log(arr1);
+        console.log(mergeArr);
+
+    </script>
+</body>
+</html>
