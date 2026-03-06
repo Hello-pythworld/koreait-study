@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        1. 사용자의 이름은 한글만 가능하고 2글자 이상
+        2. 사용자의 이름은 비어있을 수 없음
+        3. 위의 조건에 만족할 경우 "안녕하세요, OOO님" alert 출력
+            -> 버튼 클릭 후 2초 뒤에 출력되며 이를 promise, async/await을 사용하여 구현
+        4. 만족하지 않을 경우 "유효한 이름을 입력하세요." console.error 출력
+    -->
+
+    <input type="text" id="user-id">
+    <button id="btn">인사하기</button>
+    <div id="result"></div>
+
+    <script>
+        const btn = document.getElementById('btn');
+        const regexp = /^[가-힣]{2,}$/;
+
+        // 1. promise 함수 (setTimeout 포함)
+        //  - 정규표현식 검사
+        //  - 성공 시 resolve()
+        //  - 실패 시 reject()
+        function validate(userId) {
+            return new Promise((resolve, reject) => {
+                if(regexp.test(userId)) {
+                    resolve(`안녕하세요, ${userId}님`)
+                } else {
+                    reject("유효한 이름을 입력하세요.")
+                }
+            })
+        }
+
+        // 2. async 함수 (await 프로미스함수를 호출)
+        async function process(userId) {
+            try {
+                const result = await validate(userId);
+                alert(result);
+            } catch(error) {
+                console.error(error);
+            }
+        }
+
+        btn.addEventListener('click', function() {
+            const userId = document.getElementById('user-id').value;
+
+            // 3. async 함수 호출
+            process(userId);
+
+        })
+    </script>
+
+</body>
+</html> 

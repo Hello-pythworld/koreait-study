@@ -75,5 +75,92 @@
             console.error(errorMsg);
         })
     </script>
+    <script>
+        function getUserData2() {
+            return new Promise((resolve, reject)=>{
+                setTimeout (()=>{
+                    const userData = {name: "첫번째 데이터", num: 1};
+                    resolve(userData);
+                }, 1000)
+            })
+        }
+        function getUserData3() {
+            return new Promise((resolve, reject)=>{
+                setTimeout (()=>{
+                    const userData = {name: "두번째 데이터", num: 1};
+                    resolve(userData);
+                }, 1000)
+            })
+        }
+        function getUserData4() {
+            return new Promise((resolve, reject)=>{
+                setTimeout (()=>{
+                    const userData = {name: "세번째 데이터", num: 1};
+                    resolve(userData);
+                }, 1000)
+            })
+        }
+        async function fetchUserData() {
+            try {
+                // 1. getUserData2() 호출
+                const result1 = await getUserData2();
+                console.log(result1.name);
+                // 2. 1번 호출이 끝나면 getUserData3() 호출
+                const result2 = await getUserData3();
+                console.log(result2.name);
+                // 3. 2번 호출이 끝나면 getUserData4() 호출
+                const result3 = await getUserData4();
+                console.log(result3.name);
+            } catch(error) {
+                console.error(error);
+            }
+        }
+        fetchUserData();
+
+        getUserData2() 
+            .then((data) => {
+                console.log(data);
+                return getUserData3();
+            })
+            .then((data) => { // 메서드 체이닝
+                console.log(data);
+                return getUserData4();
+            })
+            .then((data)=> {
+                console.log(data);
+            })
+            .catch((error) => {
+                console.error(error);
+            })
+            function laterMessage() {
+                return new Promise((resolve, reject)=>{
+                    setTimeout(()=> {
+                        resolve("성공했습니다!");
+                }, 5000);
+            });
+        }
+            laterMessage()
+                .then((message) => console.log(message))
+                .catch((error) => console.error(error));
+    </script>
+    <script>
+        function addNumbers(num1, num2) {
+                return new Promise((resolve, reject) => {
+                    if(typeof num1 === "number" && typeof num2 === "number") {
+                    }
+                    })
+                }
+
+                addNumbers(13, 16)
+                .then((result) => console.log("덧셈 결과:", result))
+                .catch((error) => console.error(error));
+            // 1. 프로미스를 생성합니다.
+            // 2. 입력값이 숫자인지 판별
+            //  -> if문에서 typeof num1 === "number" 처럼 조건을 걸어 판별 가능합니다.
+            // 3. 두 개의 값이 숫자가 맞다면 '더한 값'을 전달하며 성공(resolve)으로 반환
+            // 4. 두 개의 값 중 하나라도 숫자가 아니라면, '숫자를 입력해주세요.'
+            //      메세지를 전달하며 실패(reject)로 반환
+
+    </script>
 </body>
 </html>
