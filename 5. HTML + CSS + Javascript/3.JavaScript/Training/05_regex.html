@@ -336,6 +336,28 @@
                 msgId.style.color = 'green'
             }
         })
+
+        // 비밀번호
+        joinPw.addEventListener('keyup', () => {
+            if(!regexJoinPassword.test(joinPw.value)) {
+                msgPw.textContent = '8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요.';
+                msgPw.style.color = 'red';
+            } else {
+                msgPw.textContent = '사용 가능한 비밀번호입니다.';
+                msgPw.style.color = 'green';
+            }
+        })
+
+        // 비밀번호 확인
+        joinPw2.addEventListener('keyup', () => {
+            if(joinPw2.value.length === 0) {
+                msgPw2.textContent = '';
+                return;
+            }
+
+            if(joinPw.value !== joinPw2.value)
+            
+        })
     </script>
 </body>
 </html>
