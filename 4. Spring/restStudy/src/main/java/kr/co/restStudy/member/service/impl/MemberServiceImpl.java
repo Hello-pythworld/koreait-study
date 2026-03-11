@@ -70,7 +70,7 @@ public class MemberServiceImpl implements MemberService{
 //		3. 사용자가 입력한 비밀번호가 암호화된 비밀번호와 일치하는지 검증
 //		 - 일치하면 응답 객체 반환
 //		 - 일치하지 않으면 null 반환
-		if(passwordEncoder.matches(request.getPassword(), member.getPassword())) {
+		if(!passwordEncoder.matches(request.getPassword(), member.getPassword())) {
 			return null;
 		}
 		
