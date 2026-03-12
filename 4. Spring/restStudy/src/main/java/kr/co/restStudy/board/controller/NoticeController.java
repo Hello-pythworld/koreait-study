@@ -3,12 +3,14 @@ package kr.co.restStudy.board.controller;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.http.HttpSession;
@@ -18,8 +20,8 @@ import kr.co.restStudy.board.service.BoardService;
 import kr.co.restStudy.member.dto.ResLoginDTO;
 import lombok.RequiredArgsConstructor;
 
-@Controller // 이거 안붙이면 bean으로 생성안함
-@RequestMapping("/board/notice")
+@RestController // 이거 안붙이면 bean으로 생성안함
+@RequestMapping("/api/board/notice")
 @RequiredArgsConstructor
 public class NoticeController { // 공지사항 컨트롤러
 
@@ -32,7 +34,7 @@ public class NoticeController { // 공지사항 컨트롤러
 	 * 
 	 */
 	@GetMapping
-	public String noticeList(@RequestParam(name = "page", defaultValue = "1") int page, Model model) {
+	public ResponseEntity<Page<ResBoardDTO>> noticeList(@RequestParam(name = "page", defaultValue = "1") int page, Model model) {
 
 		/**
 		 * 게시글 리스트 조회기능 - boardType으로 게시판 종류를 확인 후 조회 - 조회된 Board 엔티티를 Response DTO 타입으로
@@ -41,32 +43,9 @@ public class NoticeController { // 공지사항 컨트롤러
 
 //      1. 공지사항 목록 조회
 		Page<ResBoardDTO> list = boardService.getBoardList(page - 1);
-//      페이징 버튼 블록 계산
-//       - 현재 페이지가 3페이지다 -> 1~5페이지 보이게
-//       - 현재 페이지가 7페이지다 -> 6~10페이지 보이게
-		int currentPage = list.getNumber() + 1; // 현재 페이지(JPA는 0부터 시작하므로 +1)
-		int totalPages = list.getTotalPages(); // 전체 페이지
-
-		int blockSize = 5; // 5개의 버튼씩 보이게
-
-		int startPage = ((currentPage - 1) / blockSize) * blockSize + 1;
-
-		int endPage = startPage + blockSize - 1;
-
-		if (endPage > totalPages) {
-			endPage = totalPages;
-
-		}
-
-//      2. 모델에 담아 타임리프에 전달
-		model.addAttribute("list", list);
-		model.addAttribute("currentPage", currentPage);
-		model.addAttribute("totalPages", totalPages);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-
+     
 //      3. 타임리프로 이동 
-		return "pages/board/notice";
+		return ResponseEntity.ok(list);
 	}
 
 	/**
@@ -77,16 +56,13 @@ public class NoticeController { // 공지사항 컨트롤러
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("/detail")
-	public String detail(@RequestParam(name = "id") Long id, Model model) {
+	@GetMapping("/{id}")
+	public ResponseEntity<ResBoardDTO> detail(@PathVariable("id") Long id) {
 		ResBoardDTO response = boardService.getBoardDetail(id);
-		model.addAttribute("notice", response);
-		return "pages/board/notice-detail";
-	}
-
-	@GetMapping("/create/form")
-	public String createForm() {
-		return "pages/board/notice-write";
+		
+		if(response == null) return ResponseEntity.notFound().build();
+		
+		return ResponseEntity.ok(response);
 	}
 
 	@PostMapping("/create")
