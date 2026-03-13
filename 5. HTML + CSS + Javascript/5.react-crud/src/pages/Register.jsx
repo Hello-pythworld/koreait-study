@@ -1,6 +1,6 @@
 import Header from "../components/Header";
 import { useState } from "react";
-import { registerMemberMutation } from "../query/registerMemberMutation"
+import { registerMemberMutation } from "../query/registerMEmberMutation";
 
 function Register() {
     const registerMutation = registerMemberMutation();

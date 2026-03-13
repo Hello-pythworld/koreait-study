@@ -83,7 +83,7 @@ function NoticeDetail() {
                         {isWriterCheck && (
                             <div className="detail-actions">
                                 <button
-                                    onclick={goToEdit}
+                                    onClick={goToEdit}
                                     className="btn btn-secondary"
                                     style={{ textDecoration: "none" }}
                                 >
