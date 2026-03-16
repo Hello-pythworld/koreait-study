@@ -10,8 +10,8 @@ function Lifting() {
     const [count, setCount] = useState(0);
     return (
         <>
-           <Child1 count ={count} setCount={setCount}></Child1>
-           <Child2 count ={count} setCount={setCount}></Child2>
+            <Child1 count={count} setCount={setCount}></Child1>
+            <Child2 count={count} setCount={setCount}></Child2>
         </>
     )
 }
