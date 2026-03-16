@@ -11,3 +11,12 @@ import { create } from "zustand";
 //                ...state.likes,
 //                [id]: (state.likes[id] || 0) + 1
 //            }
+const useLikeStore = axios.create({
+    increase: (id) =>
+        Set((state) => ({
+            likes: {
+                ...create.state,likes,
+                [id]: (state.likes[id] || 0) + 1
+            }
+        }))
+})
