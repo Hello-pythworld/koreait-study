@@ -1,14 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 import { useCheckMemberQuery } from "../query/checkMemberQuery";
-import useUsersStore from "../store/userStore";
-import { useEffect } from "react";
 import { useLogoutMemberMutation } from "../query/logoutMemberMutation";
+import useUserStore from "../store/userStore";
+import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
+
 function Header() {
     const location = useLocation();
-    const {data, isLoading, error} = useCheckMemberQuery();
+    const { data, isLoading, error } = useCheckMemberQuery();
     const logoutMemberMutation = useLogoutMemberMutation();
-    const {currentUser, setCurrentUser} = useUsersStore();
+    const { currentUser, setCurrentUser } = useUserStore();
     const queryClient = useQueryClient();
 
     useEffect(() => {
@@ -26,7 +27,6 @@ function Header() {
             queryKey: ['checkMember']
         })
     }
-    
 
     return (
         <header>
@@ -34,7 +34,6 @@ function Header() {
                 <div className="logo">Spring Hub</div>
                 <ul className="nav-center">
                     <li><Link to="/" className={isActive('/')}>홈</Link></li>
-                    <li><Link to="/notice" className={isActive('/notice')}>공지사항</Link></li>
                     <li><Link to="/notice/list" className={isActive('/notice/list')}>공지사항</Link></li>
                     <li><Link to="/free" className={isActive('/free')}>자유게시판</Link></li>
                     <li><Link to="/profile" className={isActive('/profile')}>회원정보</Link></li>
@@ -43,16 +42,14 @@ function Header() {
                     {!currentUser &&
                         <>
                             <Link to="/login" className="btn btn-secondary">로그인</Link>
-                            <Link to="/register" className="btn btn-primary" 
-                                        style={{textDecoration: 'none', display: 'inline-block'}}>
-                                        회원가입</Link>
+                            <Link to="/register" className="btn btn-primary" style={{textDecoration: 'none', display: 'inline-block'}}>회원가입</Link>
                         </>
                     }
                     {currentUser &&
                         <>
                             <button className="btn btn-primary"
-                            style={{textDecoration: 'none', display: 'inline-block', cursor:'pointer'}}
-                            onClick={handleLogout}>로그아웃</button>
+                                    style={{textDecoration: 'none', display: 'inline-block', cursor: 'pointer'}}
+                                    onClick={handleLogout}>로그아웃</button>
                         </>
                     }
                 </div>

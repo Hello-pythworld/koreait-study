@@ -1,6 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 import { loginMemberApi } from "../api/memberApi";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 export const useLoginMemberMutation = () => {
     const navigate = useNavigate();
@@ -8,7 +8,6 @@ export const useLoginMemberMutation = () => {
     return useMutation({
         mutationFn: loginMemberApi,
         onSuccess: (data) => {
-            // setCurrentUser(data);
             alert("로그인 되었습니다.");
             navigate('/');
         },

@@ -1,5 +1,5 @@
-import { noticeGoEditPageApi } from "../api/boardApi";
-import { useQuery } from "@tanstack/react-query";
+import { noticeGoEditPageApi } from '../api/boardApi';
+import { useQuery } from '@tanstack/react-query';
 
 // 공지사항 수정 페이지 이동 데이터 조회 Query
 export const useNoticeEditFormQuery = (id) => {

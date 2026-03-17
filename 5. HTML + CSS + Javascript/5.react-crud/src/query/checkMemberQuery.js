@@ -1,5 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { checkMemberApi } from '../api/memberApi';
+import useUserStore from "../store/userStore";
+
 
 export const useCheckMemberQuery = () => {
     return useQuery({
@@ -10,3 +12,5 @@ export const useCheckMemberQuery = () => {
         staleTime: 0 // 항상 최신 상태 확인
     })
 }
+
+

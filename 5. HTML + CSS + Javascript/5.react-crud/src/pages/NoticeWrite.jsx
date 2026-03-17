@@ -1,25 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Header from "../components/Header";
 import { useQuillEditorHook } from "../hooks/useQuillEditorHook";
+import { useFileUploadHook } from "../hooks/useFileUploadHook";
 import { useNoticeCreateMutation } from "../query/NoticeCreateMutation"
-import { useFileUploadHook } from "../hooks/UseFileUploadHook";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+
 function NoticeWrite() {
     const navigate = useNavigate();
-
-// 훅
-const { selectedFiles, imagePreview, handleImageChange } = useFileUploadHook();
-const { quillRef } = useQuillEditorHook();
-
-// state
-const [category, setCategory] = useState('');
-const [title, setTitle] = useState('');
-const [content, setContent] = useState('');
-const [isSubmitting, setIsSubmitting] = useState(false);
-
-
-    const { data: boardDTO, isLoading, isError, error } = useNoticeEditFormQuery(postId);
+    const { selectedFiles, imagePreview, handleImageChange } = useFileUploadHook();
+    const {quillRef} = useQuillEditorHook();
+    const [category, setCategory] = useState('');
+    const [title, setTitle] = useState('');
     const noticeCreateMutation = useNoticeCreateMutation();
 
     const handleSubmit = (e) => {
@@ -38,6 +29,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
         // API 요청
         noticeCreateMutation.mutate(formData);
     }
+
     return (
         <>
             <Header />
@@ -79,7 +71,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
                         <div className="form-group">
                             <label>이미지 업로드</label>
                             <input type="file" id="announcementImage" accept="image/*"
-                                onChange={handleImageChange} />
+                                    onChange={handleImageChange}/>
                             {imagePreview && (
                                 <img src={imagePreview} alt="" />
                             )}

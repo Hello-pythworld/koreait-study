@@ -1,6 +1,7 @@
+import { useState } from "react";
 import Header from "../components/Header";
 import { useLoginMemberMutation } from "../query/loginMemberMutation";
-import { useState } from "react";
+
 function Login() {
     const loginMutation = useLoginMemberMutation();
     const [userId, setUserId] = useState('');
@@ -8,17 +9,16 @@ function Login() {
 
     const handleLogin = (e) => {
         e.preventDefault();
-
+        
         loginMutation.mutate({
             userId: userId,
             password: password
         })
-    }
-    
+    } 
+
     return (
         <>
             <Header />
-
             <div className="container">
                 <div className="form-card">
                     <h2>로그인</h2>
@@ -56,7 +56,6 @@ function Login() {
                     </div>
                 </div>
             </div>
-
 
         </>
     )

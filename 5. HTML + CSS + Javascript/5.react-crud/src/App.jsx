@@ -1,11 +1,11 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Home from './pages/Home.jsx'
 import Register from "./pages/Register.jsx";
 import Login from "./pages/Login.jsx";
 import NoticeList from "./pages/NoticeList.jsx"
 import NoticeDetail from "./pages/NoticeDetail.jsx";
 import NoticeWrite from "./pages/NoticeWrite.jsx";
-import NoticeEdit from "./pages/NoticeEdit.jsx";
+import NoticeEdit from "./pages/NoticeEdit.jsx"
 
 function App() {
   return (
@@ -13,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/login" element={<Login />} />
         <Route path="/notice/list" element={<NoticeList />} />
         <Route path="/notice/detail/:id" element={<NoticeDetail />} />
         <Route path="/notice/write" element={<NoticeWrite />} />

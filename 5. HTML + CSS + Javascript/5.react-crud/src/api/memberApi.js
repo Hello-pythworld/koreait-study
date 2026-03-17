@@ -1,27 +1,26 @@
-import axiosInstance from "./AxiosInstance";
-
+import axiosInstance from "./AxiosInstance"
 
 // 회원가입
-export const registerMemberApi = async (formData) => {
+export const registerMemberApi = async (formData, id) => {
+    console.log(id)
     const response = await axiosInstance.post('/api/member/register', {
         userId: formData.userId,
         userName: formData.userName,
         email: formData.email,
         password: formData.password,
         passwordCheck: formData.passwordCheck
-
     })
 
     return response.data;
 }
 
-//로그인
-export const loginMemberApi = async(loginData) => {
+// 로그인
+export const loginMemberApi = async (loginData) => {
     const response = await axiosInstance.post('/api/member/login', {
         userId: loginData.userId,
         password: loginData.password
     }, {
-        withCredentials: true // 세션 쿠키 포함하기 위해서 필요함
+        withCredentials: true   // 세션 쿠키 포함하기 위해서 필요함
     })
 
     return response.data;
@@ -37,10 +36,20 @@ export const logoutMemberApi = async () => {
 
 // 현재 로그인 상태 확인
 export const checkMemberApi = async() => {
-
     const response = await axiosInstance.get('/api/member/check', {
         withCredentials: true
     })
     return response.data;
-
 }
+
+
+
+
+
+
+
+
+
+
+
+

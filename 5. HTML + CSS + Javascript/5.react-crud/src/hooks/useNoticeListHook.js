@@ -1,30 +1,18 @@
 // Hook : 함수형 컴포넌트에서 React의 상태, 생명주기, 로직을 사용할 수 있는 API(함수)
 //  - React Hook : 리액트에서 미리 만들어진 함수(Hook)
-//      > ex) useState, useQuery, useMutataion, ...
-
-import { Navigate, useNavigate } from "react-router-dom";
-import { useNoticeListQuery } from "../query/NoticeListQuery";
-import { useState } from "react";
-import { useMemo } from "react";
+//      > ex) useState, useQuery, useMutation, ...
+import { useNavigate } from "react-router-dom"
+import { useNoticeListQuery } from "../query/NoticeListQuery"
+import { useMemo, useState } from "react";
 
 //  - 커스텀 Hook : 개발자가 직접 만든 함수(Hook)
 export const useNoticeListHook = () => {
     const navigate = useNavigate();
-    const [currentPage, setCurrentPage] = useState(1);
+    const [ currentPage, setCurrentPage ] = useState(1);
 
     // 공지사항 리스트 조회
     const { data, isLoading, isError, error } = useNoticeListQuery(currentPage);
 
-    // 유효성 검사
-    if (!title.trim()) {
-        alert('제목을 입력해주세요.');
-        return;
-    }
-
-    if (!quillRef.current) {
-        alert('에디터가 준비되지 않았습니다.');
-        return;
-    }
     // useMemo() : 계산 결과를 캐싱하여 불필요한 재계산 방지하는 리액트 훅
     //  - data의 값이 변경될 때만 연산을 수행
     //  - 변경되지 않는다면 캐싱된 이전 결과를 재사용
@@ -33,7 +21,7 @@ export const useNoticeListHook = () => {
         if (data.content && Array.isArray(data.content)) return data.content;
         return [];
     }, [data])
-
+    
     const totalPages = useMemo(() => { // 전체 페이지 수
         if (!data) return 1;
         if (data.totalPages !== undefined) return data.totalPages;
@@ -55,7 +43,7 @@ export const useNoticeListHook = () => {
 
     // 이전 페이지로 이동(<)
     const goToPrevPage = () => {
-        if (currentPage > 1) {
+        if(currentPage > 1) {
             handlePageChange(currentPage - 1);
         }
     }
@@ -67,7 +55,7 @@ export const useNoticeListHook = () => {
 
     // 다음 페이지로 이동(>)
     const goToNextPage = () => {
-        if (currentPage < totalPages) {
+        if(currentPage < totalPages) {
             handlePageChange(currentPage + 1);
         }
     }
@@ -78,37 +66,53 @@ export const useNoticeListHook = () => {
         const pageGroup = Math.ceil(currentPage / 5);
         const startPage = (pageGroup - 1) * 5 + 1;
         const endPage = Math.min(pageGroup * 5, totalPages);
-
         // 상황 : currentPage = 3, totalPages = 12
         // 1. pageGroup = 1
         // 2. startPage = 1
         // 3. endPage = 5
-        for (let i = startPage; i <= endPage; i++) {
+
+        for(let i=startPage; i<=endPage; i++) {
             pages.push(i);
         }
 
         return pages;
     }, [currentPage, totalPages])
 
-    
     const goToDetail = (postId) => {
         navigate(`/notice/detail/${postId}`);
     }
 
-    
-    return {
-        noticeList,
-        currentPage,
-        totalPages,
-        isLoading,
-        isError,
-        error,
-        handlePageChange,
-        goToFirstPage,
-        goToPrevPage,
-        goToLastPage,
-        goToNextPage,
-        pageNumbers,
-        goToDetail
-    }
+    return { noticeList,
+            currentPage,
+            totalPages,
+            isLoading,
+            isError,
+            error,
+            handlePageChange,
+            goToFirstPage,
+            goToPrevPage,
+            goToLastPage,
+            goToNextPage,
+            pageNumbers,
+            goToDetail }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

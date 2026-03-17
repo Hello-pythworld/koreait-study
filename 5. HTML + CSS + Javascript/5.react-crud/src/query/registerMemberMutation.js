@@ -6,9 +6,8 @@ import { useNavigate } from 'react-router-dom';
 // useQuery : 데이터 조회를 수행 (GET)
 export const registerMemberMutation = () => {
     const navigate = useNavigate();
-    console.log("?")
     
-    return useMutation({
+    return useMutation({ 
         mutationFn: registerMemberApi,
         onSuccess: (data) => { // 성공 시 실행
             alert("회원가입이 완료되었습니다.")

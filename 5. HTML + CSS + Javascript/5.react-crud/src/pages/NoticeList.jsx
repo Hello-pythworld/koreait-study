@@ -1,7 +1,6 @@
 import Header from "../components/Header"
 import { useNoticeListHook } from "../hooks/useNoticeListHook";
 import useUserStore from "../store/userStore";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 // pages, components : UI 렌더링
@@ -73,11 +72,11 @@ function NoticeList() {
                     >
                         <h1>공지사항</h1>
                         {/* 글쓰기 버튼 추가 */}
-                        {isLogin && <Link to="/notice/write"
+                        {isLogin && <a href="announcement-write.html"
                             className="btn btn-primary"
                             style={{ textDecoration: "none" }}>
                             글쓰기
-                        </Link>
+                        </a>
                         }
                     </div>
 
@@ -114,7 +113,7 @@ function NoticeList() {
                 ) : (
                     <div className="post-list" id="announcementList">
                         {noticeList.map((post) => (
-                            <div className="post-item"
+                            <div className="post-item" 
                                 key={post.id}
                                 onClick={() => goToDetail(post.id)}>
                                 <div className="post-header">
@@ -132,60 +131,36 @@ function NoticeList() {
                                 </div>
                             </div>
                         ))}
-
                     </div>
                 )}
-                
-                {totalPages > 1 && (
-                    < div className="pagination">
-                <button className="page-btn" onClick={goToFirstPage}>
-                    &lt;&lt;
-                </button>
-                <button className="page-btn" onClick={goToPrevPage}>
-                    &lt;
-                </button>
-                {pageNumbers.map((pageNum) =>(
-                    <button key={pageNum}
-                    className={`page-btn ${currentPage === pageNum ? 'active' : ''}`}
-                    onClick={() => handlePageChange(pageNum)}>
-                        {pageNum}
-                </button>
-                ))}
-                
-                <button className="page-btn" onClick={goToNextPage}>
-                    &gt;
-                </button>
-                <button className="page-btn" onClick={goToLastPage}>
-                    &gt;&gt;
-                </button>
-            </div>
-                )}
 
-            {/* 페이징 버튼 추가 */}
-            <div className="pagination">
-                <button className="page-btn" onClick="goToFirstPage()">
-                    &lt;&lt;
-                </button>
-                <button className="page-btn" onClick="goToPrevPage()">
-                    &lt;
-                </button>
-                <button className="page-btn active" onClick="goToPage(1)">
-                    1
-                </button>
-                <button className="page-btn" onClick="goToPage(2)">
-                    2
-                </button>
-                <button className="page-btn" onClick="goToPage(3)">
-                    3
-                </button>
-                <button className="page-btn" onClick="goToNextPage()">
-                    &gt;
-                </button>
-                <button className="page-btn" onClick="goToLastPage()">
-                    &gt;&gt;
-                </button>
+                {/* 페이징 버튼 추가 */}
+                {totalPages > 1 && (
+                    <div className="pagination">
+                        <button className="page-btn" onClick={goToFirstPage}>
+                            &lt;&lt;
+                        </button>
+                        <button className="page-btn" onClick={goToPrevPage}>
+                            &lt;
+                        </button>
+
+                        {pageNumbers.map((pageNum) => (
+                            <button key={pageNum} 
+                                    className={`page-btn ${currentPage === pageNum ? 'active' : ''}`}
+                                    onClick={() => handlePageChange(pageNum)}>
+                                {pageNum}
+                            </button>
+                        ))}
+
+                        <button className="page-btn" onClick={goToNextPage}>
+                            &gt;
+                        </button>
+                        <button className="page-btn" onClick={goToLastPage}>
+                            &gt;&gt;
+                        </button>
+                    </div>
+                )}
             </div>
-        </div >
         </>
     )
 }

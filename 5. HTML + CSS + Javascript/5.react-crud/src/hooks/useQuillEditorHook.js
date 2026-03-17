@@ -9,21 +9,6 @@ export const useQuillEditorHook = () => {
     const editorInitializedRef = useRef(false)
     const quillRef = useRef(null);
 
-    // API 데이터가 로드되고 에디터가 초기화되면 내용 로드
-    useEffect(() => {
-        if (editorReady && quillRef.current && boardDTO && boardDTO.content && !contentLoadedRef.current) {
-            try {
-                const content = boardDTO.content || '';
-                if (content.trim()) {
-                    quillRef.current.clipboard.dangerouslyPasteHTML(content);
-                    contentLoadedRef.current = true;
-                    console.log('[NoticeEdit] 게시글 내용을 에디터에 로드 완료');
-                }
-            } catch (err) {
-                console.error('[NoticeEdit] 내용 로드 실패:', err);
-            }
-        }
-    }, [boardDTO, editorReady]); // boardDTO와 에디터 초기화 상태가 준비되면 실행
     // Quill 에디터 초기화
     useEffect(() => {
         let timeoutId = null;
@@ -96,5 +81,5 @@ export const useQuillEditorHook = () => {
         };
     }, []); // 컴포넌트 마운트 시 한 번만 실행
 
-    return { quillRef, editorReady };
+    return {quillRef};
 }

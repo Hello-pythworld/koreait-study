@@ -1,11 +1,11 @@
-import axios from "axios";
 import axiosInstance from "./AxiosInstance"
 
 // 공지사항 목록 조회
 export const noticeListApi = async (page = 1) => {
+
     const response = await axiosInstance.get("/api/board/notice", {
         params: {
-            page: page,
+            page: page
         },
         withCredentials: true
     })
@@ -18,25 +18,22 @@ export const noticeDetailApi = async (postId) => {
         const response = await axiosInstance.get(`/api/board/notice/${postId}`, {
             withCredentials: true
         })
-
         return response.data;
     } catch (err) {
-
-        // 서버가 응답을 했는데 상태코드가 4xx, 5xx일 경우
+        // 서버가 응답을 했는데 상태 코드가 4xx, 5xx
         if (err.response) {
             console.error('응답 데이터 : ', err.response.data);
             throw err;
         } else if (err.request) {
-            // 요청은 보냈는데 서버가 응답을 하지 않았을 때,
-            console.error('서버에 연결할 수 없습니다!')
+            // 요청은 보냈는데 서버가 응답을 하지 않았을 때
+            console.error('서버에 연결할 수 없습니다.')
             throw err;
         } else {
-            // 요청 중 에러가 발생했을 경우
+            // 요청 중 에러 발생했을 때
             console.error('요청 중 에러 발생 : ', err.message);
             throw err;
         }
     }
-
 }
 
 export const noticeDeleteApi = async (postId) => {
@@ -44,20 +41,24 @@ export const noticeDeleteApi = async (postId) => {
         withCredentials: true
     });
 
-    return response.data;
+    return response.data
 }
 
 export const noticeCreateApi = async (formData) => {
+    formData.forEach(ele => {
+        console.log(ele)
+    })
     const response = await axiosInstance.post("/api/board/notice",
         formData, {
         withCredentials: true,
         header: {
-            "Content-Type": "multipart/form-data"
+            'Content-Type': 'multipart/form-data'
         }
     })
 
     return response.data;
 }
+
 
 // 공지사항 수정 페이지 이동 조회
 export const noticeGoEditPageApi = async (id) => {
@@ -85,7 +86,7 @@ export const noticeGoEditPageApi = async (id) => {
             throw error;
         }
     }
-}; 
+};
 
 // 공지사항 수정 요청
 export const noticeEditApi = async (id, formData) => {
@@ -117,3 +118,9 @@ export const noticeEditApi = async (id, formData) => {
         }
     }
 };
+
+
+
+
+
+

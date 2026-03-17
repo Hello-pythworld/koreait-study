@@ -1,6 +1,6 @@
 import Header from "../components/Header";
-import { useState } from "react";
-import { registerMemberMutation } from "../query/registerMEmberMutation";
+import {useState} from "react";
+import {registerMemberMutation} from "../query/registerMemberMutation"
 
 function Register() {
     const registerMutation = registerMemberMutation();
@@ -15,11 +15,7 @@ function Register() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log("handleChange name: ", name);
-        console.log("handleChange value: ", value);
-
         setFormData({ ...formData, [name]: value})
-        console.log(formData);
     }
 
     const handleRegister = (e) => {
