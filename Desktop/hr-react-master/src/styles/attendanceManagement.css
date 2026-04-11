@@ -1,0 +1,20 @@
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.icon-box.green {
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+
+.btn-check-in {
+    width: 100%;
+    padding: 12px 0;
+    margin-bottom: 12px;
+    background-color: #1976d2;
+    color: #ffffff;
+    border-radius: 8px;
+}
