@@ -1,0 +1,26 @@
+# - Pod는 5개 유지
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-final-rs
+spec:
+  replicas: 5
+  selector:
+    matchLabels: 
+      app: nginx-final
+  template:
+    metadata:
+      labels:
+        app: nginx-final
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.25
+          ports:
+            - containerPort: 80
+          command: ["/bin/sh"]
+          args:
+            - -c
+            - |
+              echo "<h1>$(hostname)</h1>" > /usr/share/nginx/html/index.html
+              nginx -g 'daemon off;'

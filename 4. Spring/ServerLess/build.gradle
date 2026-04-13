@@ -1,0 +1,73 @@
+import com.github.jengelman.gradle.plugins.shadow.transformers.PropertiesFileTransformer
+import com.github.jengelman.gradle.plugins.shadow.transformers.AppendingTransformer
+
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.2.5'
+	id 'io.spring.dependency-management' version '1.1.4'
+	id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'kr.co'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.amazonaws.serverless:aws-serverless-java-container-springboot3:2.0.1'
+	implementation 'com.amazonaws:aws-lambda-java-core:1.2.3'
+	implementation 'com.amazonaws:aws-lambda-java-events:3.11.3'
+	implementation 'org.springframework.boot:spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    // 테스트에서도 쓰려면
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+tasks.named('bootJar') {
+
+	enabled = false 
+}
+
+tasks.named('jar') {
+	enabled = true
+}
+
+shadowJar {
+	archiveBaseName.set('lambda')
+	archiveClassifier.set('')
+	archiveVersion.set('')
+	
+	mergeServiceFiles()
+	
+	transform(PropertiesFileTransformer) {
+		paths = ['META-INF/spring.factories']
+		mergeStrategy = "append"
+}
+
+
+	
+
+transform(AppendingTransformer) {
+	resource = 'META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports'
+}
+
+transform(AppendingTransformer) { resource = 'META-INF/spring.handlers' }
+transform(AppendingTransformer) { resource = 'META-INF/spring.schemas' }
+}

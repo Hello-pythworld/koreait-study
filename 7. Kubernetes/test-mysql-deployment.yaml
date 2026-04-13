@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-mysql-deployment
+  labels:
+    app: test-mysql-deployment
+
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: test-mysql-container
+  template:
+    metadata: 
+      labels:
+        app: test-mysql-container
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:8.0
+        ports:
+          - containerPort: 3306
+        env:  # 환경 변수 목록
+          - name: MYSQL_ROOT_PASSWORD # 컨테이너 내부에서 사용할 환경 변수 이름
+            valueFrom: # 외부 리소스에서 값을 가져오겠다.
+              configMapKeyRef: # ConfigMap에서 값을 가져오겠다.
+                name: test-configmap # 참조한 ConfigMap의 이름
+                key: MYSQL_ROOT_PASSWORD # ConfigMap에 있는 Key
+          - name: MYSQL_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: test-configmap
+                key: MYSQL_DATABASE
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: test-configmap
+                key: DB_HOST

@@ -116,6 +116,7 @@ public class NoticeController { // 공지사항 컨트롤러
 
 		return ResponseEntity.ok("성공!");
 	}
+	
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> delete(@PathVariable("id") Long id, HttpSession session) {

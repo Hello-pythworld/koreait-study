@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: test-replicaset
+  
+spec:
+  # 유지할 Pod 개수
+  #   - 항상 3개의 Pod를 유지하겠다.
+  replicas: 3
+
+  # 어떤 Pod를 관리할 것인지 정의
+  #   - Pod의 label 기준으로 선택
+  selector:
+    matchLabels:
+      app: test-replicaset
+  
+  # Pod 생성 템플릿
+  template:
+    metadata:
+      name: test-replicaset
+      labels:
+        app: test-replicaset
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.25
+          ports:
+          - containerPort: 80

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: test-configmap
+  namespace: default
+
+data:
+  MYSQL_ROOT_PASSWORD: prod_root_pwd
+  MYSQL_DATABASE: appdb_prod
+  DB_HOST: mysql_prod
+  DB_PORT: "3306"
+  ENVIRONMENTL: production
